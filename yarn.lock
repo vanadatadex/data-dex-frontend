@@ -7326,6 +7326,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@uniswap/default-token-list@npm:^12.27.0":
+  version: 12.27.0
+  resolution: "@uniswap/default-token-list@npm:12.27.0"
+  checksum: 10c0/4c95e4f19a9df82b238d6c8c2b92a6fac53592694fa7546ff7abea07086b3de27b1fd4292ba9ed43058fd324771e5c765084a256e10718eccfccbaa75437c8c7
+  languageName: node
+  linkType: hard
+
 "@uniswap/eslint-config@npm:^1.2.0":
   version: 1.2.0
   resolution: "@uniswap/eslint-config@npm:1.2.0"
@@ -7788,7 +7795,7 @@ __metadata:
     "@types/uuid": "npm:^8.3.4"
     "@types/wcag-contrast": "npm:^3.0.0"
     "@types/xml2js": "npm:^0.4.12"
-    "@uniswap/default-token-list": "npm:^11.2.0"
+    "@uniswap/default-token-list": "npm:^12.27.0"
     "@uniswap/eslint-config": "npm:^1.2.0"
     "@uniswap/governance": "npm:^1.0.2"
     "@uniswap/liquidity-staker": "npm:^1.0.2"
