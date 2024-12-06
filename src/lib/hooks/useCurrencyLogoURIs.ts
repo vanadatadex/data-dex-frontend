@@ -3,7 +3,6 @@ import useHttpLocations from 'hooks/useHttpLocations'
 import { useMemo } from 'react'
 import { isAddress } from 'utils'
 
-import EthereumLogo from '../../assets/images/ethereum-logo.png'
 import VanaLogo from '../../assets/images/vana.png'
 import AvaxLogo from '../../assets/svg/avax_logo.svg'
 import BnbLogo from '../../assets/svg/bnb-logo.svg'
@@ -29,6 +28,8 @@ export function chainIdToNetworkName(networkId: ChainId): Network {
       return 'celo'
     case ChainId.AVALANCHE:
       return 'avalanchec'
+    case ChainId.VANA:
+      return 'vana'
     case ChainId.VANA_MOKSHA:
       return 'vana'
     default:
@@ -36,7 +37,7 @@ export function chainIdToNetworkName(networkId: ChainId): Network {
   }
 }
 
-export function getNativeLogoURI(chainId: ChainId = ChainId.MAINNET): string {
+export function getNativeLogoURI(chainId: ChainId = ChainId.VANA): string {
   switch (chainId) {
     case ChainId.POLYGON:
     case ChainId.POLYGON_MUMBAI:
@@ -48,10 +49,12 @@ export function getNativeLogoURI(chainId: ChainId = ChainId.MAINNET): string {
       return CeloLogo
     case ChainId.AVALANCHE:
       return AvaxLogo
+    case ChainId.VANA:
+      return VanaLogo
     case ChainId.VANA_MOKSHA:
       return VanaLogo
     default:
-      return EthereumLogo
+      return VanaLogo
   }
 }
 

@@ -109,6 +109,12 @@ export const FALLBACK_URLS = {
     'https://1rpc.io/base',
     'https://base.meowrpc.com',
   ],
+  [ChainId.VANA]: [
+    // "Safe" URLs
+    'https://empty-green-layer.vana-mainnet.quiknode.pro/3c87e7896ce3b9b4543f43e61b1b1d61fc5ba43f',
+    // "Fallback" URLs
+    'https://rpc.islander.vana.org',
+  ],
   [ChainId.VANA_MOKSHA]: [
     // "Safe" URLs
     'https://rpc.moksha.vana.org',
@@ -138,5 +144,6 @@ export const RPC_URLS = {
   [ChainId.BNB]: [...FALLBACK_URLS[ChainId.BNB]],
   [ChainId.AVALANCHE]: [...FALLBACK_URLS[ChainId.AVALANCHE]],
   [ChainId.BASE]: [...FALLBACK_URLS[ChainId.BASE]],
+  [ChainId.VANA]: [...FALLBACK_URLS[ChainId.VANA]],
   [ChainId.VANA_MOKSHA]: [...FALLBACK_URLS[ChainId.VANA_MOKSHA]],
 }

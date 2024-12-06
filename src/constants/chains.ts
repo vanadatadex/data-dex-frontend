@@ -15,6 +15,7 @@ export const CHAIN_IDS_TO_NAMES = {
   [ChainId.BNB]: 'bnb',
   [ChainId.AVALANCHE]: 'avalanche',
   [ChainId.BASE]: 'base',
+  [ChainId.VANA]: 'vana',
   [ChainId.VANA_MOKSHA]: 'vana_moksha',
 } as const
 
@@ -22,7 +23,7 @@ export const CHAIN_IDS_TO_NAMES = {
 const NOT_YET_UX_SUPPORTED_CHAIN_IDS: number[] = [ChainId.BASE_GOERLI]
 
 // TODO: include BASE_GOERLI when routing is implemented
-export type SupportedInterfaceChain = ChainId.VANA_MOKSHA | ChainId.MAINNET
+export type SupportedInterfaceChain = ChainId.VANA_MOKSHA | ChainId.MAINNET | ChainId.VANA
 // | ChainId.OPTIMISM
 // | ChainId.OPTIMISM_GOERLI
 // | ChainId.ARBITRUM_ONE
@@ -57,7 +58,7 @@ export const SUPPORTED_GAS_ESTIMATE_CHAIN_IDS = [
   ChainId.BASE,
 ] as const
 
-export const SUPPORTED_CHAIN_IDS = [ChainId.VANA_MOKSHA]
+export const SUPPORTED_CHAIN_IDS = [ChainId.VANA, ChainId.VANA_MOKSHA]
 
 /**
  * Supported networks for V2 pool behavior.
@@ -87,6 +88,7 @@ const L1_CHAIN_IDS = [
   ChainId.CELO_ALFAJORES,
   ChainId.BNB,
   ChainId.AVALANCHE,
+  ChainId.VANA,
   ChainId.VANA_MOKSHA,
 ] as const
 
@@ -113,6 +115,8 @@ export type SupportedL2ChainId = (typeof L2_CHAIN_IDS)[number]
  */
 export function getChainPriority(chainId: ChainId): number {
   switch (chainId) {
+    case ChainId.VANA:
+      return 1480
     case ChainId.VANA_MOKSHA:
       return 14800
     case ChainId.MAINNET:

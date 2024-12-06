@@ -29,5 +29,6 @@ export const RPC_PROVIDERS = {
   // [ChainId.BNB]: providerFactory(ChainId.BNB),
   // [ChainId.AVALANCHE]: providerFactory(ChainId.AVALANCHE),
   // [ChainId.BASE]: providerFactory(ChainId.BASE),
+  [ChainId.VANA]: providerFactory(ChainId.VANA),
   [ChainId.VANA_MOKSHA]: providerFactory(ChainId.VANA_MOKSHA),
 }

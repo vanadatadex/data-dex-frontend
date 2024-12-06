@@ -81,6 +81,8 @@ export const USDC_BASE = new Token(
   'USDbC'
 )
 
+export const USDC_VANA = new Token(ChainId.VANA, '0x1Fe0eBD7B53fC434Ea0a69074406503F9Ab0e2FC', 18, 'tUSDC', 'Test USDC')
+
 export const USDC_VANA_MOKSHA = new Token(
   ChainId.VANA_MOKSHA,
   '0xB39a50B5806039C82932bB96CEFbcbc61231045C',
@@ -344,6 +346,7 @@ export const WRAPPED_NATIVE_CURRENCY: { [chainId: number]: Token | undefined } =
     'WAVAX',
     'Wrapped AVAX'
   ),
+  [ChainId.VANA]: new Token(ChainId.VANA, '0x00EDdD9621Fb08436d0331c149D1690909a5906d', 18, 'WVANA', 'Wrapped VANA'),
   [ChainId.VANA_MOKSHA]: new Token(
     ChainId.VANA_MOKSHA,
     '0xbccc4b4c6530F82FE309c5E845E50b5E9C89f2AD',
@@ -434,8 +437,8 @@ class AvaxNativeCurrency extends NativeCurrency {
   }
 }
 
-export function isVana(chainId: number): chainId is ChainId.VANA_MOKSHA {
-  return chainId === ChainId.VANA_MOKSHA
+export function isVana(chainId: number): chainId is ChainId.VANA_MOKSHA | ChainId.VANA {
+  return chainId === ChainId.VANA_MOKSHA || chainId === ChainId.VANA
 }
 class VanaNativeCurrency extends NativeCurrency {
   equals(other: Currency): boolean {
@@ -511,6 +514,7 @@ export const TOKEN_SHORTHANDS: { [shorthand: string]: { [chainId in ChainId]?: s
     [ChainId.GOERLI]: USDC_GOERLI.address,
     [ChainId.SEPOLIA]: USDC_SEPOLIA.address,
     [ChainId.AVALANCHE]: USDC_AVALANCHE.address,
+    [ChainId.VANA]: USDC_VANA.address,
     [ChainId.VANA_MOKSHA]: USDC_VANA_MOKSHA.address,
   },
 }

@@ -174,6 +174,7 @@ export enum TransactionStatus {
 export enum Currency {
   Eth = 'ETH',
   Matic = 'MATIC',
+  Vana = 'VANA',
   Usd = 'USD',
 }
 
@@ -188,6 +189,7 @@ export enum Chain {
   EthereumSepolia = 'ETHEREUM_SEPOLIA',
   Optimism = 'OPTIMISM',
   Polygon = 'POLYGON',
+  Vana = 'VANA',
   UnknownChain = 'UNKNOWN_CHAIN',
 }
 

@@ -227,7 +227,7 @@ export function currencyAddressForSwapQuote(currency: Currency): string {
     if (isBsc(currency.chainId)) return SwapRouterNativeAssets.BNB
     if (isAvalanche(currency.chainId)) return SwapRouterNativeAssets.AVAX
     if (isVana(currency.chainId)) return SwapRouterNativeAssets.VANA
-    return SwapRouterNativeAssets.ETH
+    return SwapRouterNativeAssets.VANA
   }
 
   return currency.address

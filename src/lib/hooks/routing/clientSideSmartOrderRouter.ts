@@ -8,7 +8,6 @@ import {
   OnChainQuoteProvider,
   SupportedIds,
   UniswapMulticallProvider,
-  V3SubgraphProvider,
 } from '@vanadex/smart-order-router'
 import { asSupportedChain } from 'constants/chains'
 import { RPC_PROVIDERS } from 'constants/providers'
@@ -62,7 +61,7 @@ export function getRouter(chainId: ChainId, web3Provider: Web3Provider | undefin
         multicallChunk: 6,
       }
     )
-    const v3SubgraphProvider = new V3SubgraphProvider(chainId)
+    // const v3SubgraphProvider = new V3SubgraphProvider(chainId)
     cachedProviderRouter = {
       chainId,
       routerProvider: {
@@ -72,7 +71,7 @@ export function getRouter(chainId: ChainId, web3Provider: Web3Provider | undefin
           multicall2Provider,
           onChainQuoteProvider,
           tokenValidatorProvider,
-          v3SubgraphProvider,
+          // v3SubgraphProvider,
         }),
         provider: web3Provider,
       },

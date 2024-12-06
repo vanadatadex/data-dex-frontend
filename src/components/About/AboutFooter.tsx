@@ -92,7 +92,7 @@ const LogoSectionContent = () => {
   return (
     <>
       <SocialLinks>
-        <SocialLink href="https://discord.gg/52gWMtgv" target="_blank" rel="noopener noreferrer">
+        <SocialLink href="https://discord.gg/withvana" target="_blank" rel="noopener noreferrer">
           <DiscordIcon size={32} />
         </SocialLink>
         <SocialLink href="https://x.com/withvana" target="_blank" rel="noopener noreferrer">
@@ -127,7 +127,7 @@ export const AboutFooter = () => {
         </LinkGroup>
         <LinkGroup>
           <LinkGroupTitle>Get Help</LinkGroupTitle>
-          <ExternalTextLink href="https://discord.gg/52gWMtgv" target="_blank" rel="noopener noreferrer">
+          <ExternalTextLink href="https://discord.gg/withvana" target="_blank" rel="noopener noreferrer">
             Contact Us On Discord
           </ExternalTextLink>
           <ExternalTextLink href="https://support.uniswap.org/hc/en-us">Help Center</ExternalTextLink>
