@@ -127,15 +127,12 @@ export const MenuDropdown = () => {
                 alignItems={{ sm: 'center', md: 'flex-start' }}
                 paddingX="8"
               >
-                <SecondaryLinkedText href="https://help.uniswap.org/en/">
-                  <Trans>Help center</Trans> ↗
-                </SecondaryLinkedText>
-                <SecondaryLinkedText href="https://docs.uniswap.org/">
+                <SecondaryLinkedText href="https://docs.vana.org/">
                   <Trans>Documentation</Trans> ↗
                 </SecondaryLinkedText>
               </Box>
               <IconRow>
-                <Icon href="https://discord.gg/52gWMtgv">
+                <Icon href="https://discord.gg/withvana">
                   <DiscordIconMenu className={styles.hover} width={24} height={24} color={themeVars.colors.neutral2} />
                 </Icon>
                 <Icon href="https://x.com/withvana">

@@ -14,6 +14,8 @@ function getRpcUrl(chainId: SupportedInterfaceChain): string {
       // case ChainId.GOERLI:
       // case ChainId.SEPOLIA:
       return RPC_URLS[chainId][0]
+    case ChainId.VANA:
+      return RPC_URLS[chainId][0]
     case ChainId.VANA_MOKSHA:
       return RPC_URLS[chainId][0]
     // Attempting to add a chain using an infura URL will not work, as the URL will be unreachable from the MetaMask background page.

@@ -7,17 +7,29 @@ const path = require('path')
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin')
 const { IgnorePlugin, ProvidePlugin } = require('webpack')
 const { RetryChunkLoadPlugin } = require('webpack-retry-chunk-load-plugin')
-// const webpack = require('webpack')
+const threadLoader = require('thread-loader')
+const CracoEsbuildPlugin = require('craco-esbuild')
+const webpack = require('webpack')
+
+// Warmup thread pool before starting development
+threadLoader.warmup(
+  {
+    // pool options
+    workers: 4,
+    workerParallelJobs: 50,
+    poolTimeout: 2000,
+  },
+  ['swc-loader']
+)
 
 const commitHash = execSync('git rev-parse HEAD').toString().trim()
 const isProduction = process.env.NODE_ENV === 'production'
-const isDevelopment = !isProduction
+// const isDevelopment = !isProduction
 
 process.env.REACT_APP_GIT_COMMIT_HASH = commitHash
 
-// Linting and type checking are only necessary as part of development and testing.
-// Omit them from production builds, as they slow down the feedback loop.
-const shouldLintOrTypeCheck = !isProduction
+// Disable linting and type checking in production
+const shouldLintOrTypeCheck = false
 
 function getCacheDirectory(cacheName) {
   // Include the trailing slash to denote that this is a directory.
@@ -65,6 +77,9 @@ module.exports = {
       })
     },
   },
+  babel: {
+    plugins: ['macros'],
+  },
   webpack: {
     plugins: [
       // Webpack 5 does not polyfill node globals, so we do so for those necessary:
@@ -83,11 +98,20 @@ module.exports = {
         }`,
         maxRetries: 3,
       }),
+      new webpack.DefinePlugin({
+        process: { env: {}, browser: {} },
+      }),
     ],
     configure: (webpackConfig) => {
-      // Disable source maps in development
-      if (isDevelopment) {
-        webpackConfig.devtool = false
+      // Disable source maps in production and development
+      webpackConfig.devtool = false
+
+      // Enable persistent caching
+      webpackConfig.cache = {
+        type: 'filesystem',
+        buildDependencies: {
+          config: [__filename],
+        },
       }
 
       // Configure webpack plugins:
@@ -118,7 +142,7 @@ module.exports = {
           return true
         })
 
-      // Configure webpack resolution:
+      // Optimize module resolution
       webpackConfig.resolve = Object.assign(webpackConfig.resolve, {
         plugins: webpackConfig.resolve.plugins.map((plugin) => {
           // Allow vanilla-extract in production builds.
@@ -138,6 +162,8 @@ module.exports = {
           https: false,
           http: false,
         },
+        unsafeCache: true,
+        symlinks: false, // Disable symlink resolution for faster builds
       })
 
       // Retain source maps for node_modules packages:
@@ -149,8 +175,23 @@ module.exports = {
       // Configure webpack transpilation (create-react-app specifies transpilation rules in a oneOf):
       webpackConfig.module.rules[1].oneOf = webpackConfig.module.rules[1].oneOf.map((rule) => {
         if (rule.loader && rule.loader.match(/babel-loader/)) {
-          rule.loader = 'swc-loader'
-          delete rule.options
+          const { loader, options, ...rest } = rule // Remove both loader and options
+          return {
+            ...rest,
+            use: [
+              {
+                loader: 'thread-loader',
+                options: {
+                  workers: 4,
+                  workerParallelJobs: 50,
+                  poolTimeout: isProduction ? 500 : 2000,
+                },
+              },
+              {
+                loader: 'swc-loader',
+              },
+            ],
+          }
         }
         return rule
       })
@@ -165,6 +206,27 @@ module.exports = {
         loader: path.join(__dirname, 'scripts/terser-loader.js'),
         options: { compress: true, mangle: false },
       })
+
+      // Add cache groups for better chunk splitting
+      webpackConfig.optimization = Object.assign(
+        webpackConfig.optimization,
+        isProduction
+          ? {
+              splitChunks: {
+                chunks: 'all',
+                maxSize: 5 * 1024 * 1024,
+                cacheGroups: {
+                  vendor: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendor',
+                    chunks: 'all',
+                  },
+                },
+              },
+              runtimeChunk: 'single',
+            }
+          : {}
+      )
 
       // Configure webpack optimization:
       webpackConfig.optimization = Object.assign(
@@ -190,4 +252,22 @@ module.exports = {
       return webpackConfig
     },
   },
+  plugins: [
+    {
+      plugin: CracoEsbuildPlugin,
+      options: {
+        esbuildMinimizerOptions: {
+          target: 'es2020',
+          css: true,
+        },
+        esbuildLoaderOptions: {
+          loader: 'tsx',
+          target: 'es2020',
+          jsxFactory: 'React.createElement',
+          jsxFragment: 'React.Fragment',
+        },
+        skipEsbuildJest: true, // Disable esbuild for Jest
+      },
+    },
+  ],
 }

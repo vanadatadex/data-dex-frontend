@@ -1,4 +1,5 @@
 import { Trans } from '@lingui/macro'
+import { useWeb3React } from '@web3-react/core'
 import { useAccountDrawer } from 'components/AccountDrawer'
 import Web3Status from 'components/Web3Status'
 import { useIsPoolsPage } from 'hooks/useIsPoolsPage'
@@ -30,6 +31,21 @@ interface MenuItemProps {
   dataTestId?: string
 }
 
+const getInfoUrl = (chainId: number | undefined) => {
+  const baseUrl = 'https://datadex-info.netlify.app'
+  if (!chainId) return baseUrl
+
+  switch (chainId) {
+    case 1480:
+      return `${baseUrl}/#/vana`
+    case 14800:
+      return `${baseUrl}/#/vana-moksha`
+    // Add more chains as needed
+    default:
+      return baseUrl
+  }
+}
+
 const MenuItem = ({ href, dataTestId, id, isActive, children }: MenuItemProps) => {
   return (
     <NavLink
@@ -44,10 +60,27 @@ const MenuItem = ({ href, dataTestId, id, isActive, children }: MenuItemProps) =
   )
 }
 
+// Add ExternalMenuItem component
+const ExternalMenuItem = ({ href, children }: { href: string; children: ReactNode }) => {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={styles.menuItem}
+      style={{ textDecoration: 'none', overflow: 'hidden', whiteSpace: 'nowrap' }}
+    >
+      {children} ↗
+    </a>
+  )
+}
+
 export const PageTabs = () => {
   const { pathname } = useLocation()
-
+  const { chainId } = useWeb3React()
   const isPoolActive = useIsPoolsPage()
+
+  const infoUrl = getInfoUrl(chainId)
 
   return (
     <>
@@ -57,9 +90,9 @@ export const PageTabs = () => {
       <MenuItem href="/pools" dataTestId="pool-nav-link" isActive={isPoolActive}>
         <Trans>Pools</Trans>
       </MenuItem>
-      {/* <MenuItem href="/whatishorswap">
-        <Trans>What is Horswap?</Trans>
-      </MenuItem> */}
+      <ExternalMenuItem href={infoUrl}>
+        <Trans>Info</Trans>
+      </ExternalMenuItem>
       <Box marginY="4">
         <MenuDropdown />
       </Box>

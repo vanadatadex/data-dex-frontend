@@ -28,6 +28,7 @@ import {
   USDC_MAINNET,
   USDC_OPTIMISM,
   USDC_POLYGON,
+  USDC_VANA,
   USDC_VANA_MOKSHA,
   USDT,
   USDT_ARBITRUM_ONE,
@@ -115,6 +116,12 @@ export const COMMON_BASES: ChainCurrencyList = {
     USDC_AVALANCHE,
     USDT_AVALANCHE,
     WETH_AVALANCHE,
+  ],
+  [ChainId.VANA]: [
+    nativeOnChain(ChainId.VANA),
+    WRAPPED_NATIVE_CURRENCY[ChainId.VANA] as Token,
+    WRAPPED_NATIVE_CURRENCY[ChainId.VANA] as Token,
+    USDC_VANA,
   ],
   [ChainId.VANA_MOKSHA]: [
     nativeOnChain(ChainId.VANA_MOKSHA),

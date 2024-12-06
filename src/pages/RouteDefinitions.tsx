@@ -2,7 +2,6 @@ import { lazy, ReactNode, useMemo } from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
 
 // High-traffic pages (index and /swap) should not be lazy-loaded.
-import Landing from './Landing'
 import Swap from './Swap'
 
 const AddLiquidity = lazy(() => import('pages/AddLiquidity'))
@@ -58,13 +57,7 @@ function createRouteDefinition(route: Partial<RouteDefinition>): RouteDefinition
 export const routes: RouteDefinition[] = [
   createRouteDefinition({
     path: '/',
-    getElement: (args) => {
-      return args.hash ? <Navigate to={args.hash.replace('#', '')} replace /> : <Landing />
-    },
-  }),
-  createRouteDefinition({
-    path: '/send',
-    getElement: () => <Navigate to={{ ...location, pathname: '/swap' }} replace />,
+    getElement: () => <Swap />,
   }),
   createRouteDefinition({ path: '/swap', getElement: () => <Swap /> }),
   createRouteDefinition({ path: '/pool/v2/find', getElement: () => <PoolFinder /> }),
