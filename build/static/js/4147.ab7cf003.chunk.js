@@ -1,1 +1,0 @@
-(self.webpackChunk_vanadex_datadex=self.webpackChunk_vanadex_datadex||[]).push([[4147],{15340:()=>{},79838:()=>{}}]);

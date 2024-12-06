@@ -79,6 +79,7 @@ module.exports = {
   },
   babel: {
     plugins: ['macros'],
+    exclude: ['node_modules'],
   },
   webpack: {
     plugins: [
