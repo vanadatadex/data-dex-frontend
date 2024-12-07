@@ -1,6 +1,6 @@
 import { ChainId } from '@vanadex/sdk-core'
 import { Connector } from '@web3-react/types'
-import { networkConnection } from 'connection'
+import { networkConnection, walletConnectV2Connection } from 'connection'
 import { getChainInfo } from 'constants/chainInfo'
 import { isSupportedChain, SupportedInterfaceChain } from 'constants/chains'
 import { FALLBACK_URLS, RPC_URLS } from 'constants/networks'
@@ -36,7 +36,7 @@ export function useSwitchChain() {
       } else {
         dispatch(startSwitchingChain(chainId))
         try {
-          if ([networkConnection.connector].includes(connector)) {
+          if ([walletConnectV2Connection.connector, networkConnection.connector].includes(connector)) {
             await connector.activate(chainId)
           } else {
             const info = getChainInfo(chainId)
