@@ -4,23 +4,26 @@ import { initializeConnector } from '@web3-react/core'
 import { GnosisSafe } from '@web3-react/gnosis-safe'
 import { MetaMask } from '@web3-react/metamask'
 import { Network } from '@web3-react/network'
-import { Connector } from '@web3-react/types'
+import { Actions, Connector } from '@web3-react/types'
 import GNOSIS_ICON from 'assets/images/gnosis.png'
 import HORSWAP_LOGO from 'assets/svg/logo.svg'
 import COINBASE_ICON from 'assets/wallets/coinbase-icon.svg'
+import WALLET_CONNECT_ICON from 'assets/wallets/walletconnect-icon.svg'
+import { useSyncExternalStore } from 'react' // Make sure this import is from 'react'
 import { isMobile } from 'utils/userAgent'
 
 import { RPC_URLS } from '../constants/networks'
 import { RPC_PROVIDERS } from '../constants/providers'
 import { Connection, ConnectionType } from './types'
 import { getInjection, getIsCoinbaseWallet, getIsInjected, getIsMetaMaskWallet } from './utils'
+import { WalletConnectV2 } from './WalletConnectV2'
 
 function onError(error: Error) {
   console.debug(`web3-react error: ${error}`)
 }
 
 const [web3Network, web3NetworkHooks] = initializeConnector<Network>(
-  (actions) => new Network({ actions, urlMap: RPC_PROVIDERS, defaultChainId: 1 })
+  (actions) => new Network({ actions, urlMap: RPC_PROVIDERS, defaultChainId: 1480 })
 )
 export const networkConnection: Connection = {
   getName: () => 'Network',
@@ -66,6 +69,65 @@ export const gnosisSafeConnection: Connection = {
   shouldDisplay: () => false,
 }
 
+export const walletConnectV2Connection: Connection = new (class implements Connection {
+  private initializer = (actions: Actions, defaultChainId = ChainId.VANA) =>
+    new WalletConnectV2({ actions, defaultChainId, onError })
+
+  type = ConnectionType.WALLET_CONNECT_V2
+  getName = () => 'WalletConnect'
+  getIcon = () => WALLET_CONNECT_ICON
+  shouldDisplay = () => !getIsInjectedMobileBrowser()
+
+  private activeConnector = initializeConnector<WalletConnectV2>(this.initializer)
+  // The web3-react Provider requires referentially stable connectors, so we use proxies to allow lazy connections
+  // whilst maintaining referential equality.
+  private proxyConnector = new Proxy(
+    {},
+    {
+      get: (target, p, receiver) => Reflect.get(this.activeConnector[0], p, receiver),
+      getOwnPropertyDescriptor: (target, p) => Reflect.getOwnPropertyDescriptor(this.activeConnector[0], p),
+      getPrototypeOf: () => WalletConnectV2.prototype,
+      set: (target, p, receiver) => Reflect.set(this.activeConnector[0], p, receiver),
+    }
+  ) as (typeof this.activeConnector)[0]
+  private proxyHooks = new Proxy(
+    {},
+    {
+      get: (target, p, receiver) => {
+        return () => {
+          // Because our connectors are referentially stable (through proxying), we need a way to trigger React renders
+          // from outside of the React lifecycle when our connector is re-initialized. This is done via 'change' events
+          // with `useSyncExternalStore`:
+          const hooks = useSyncExternalStore(
+            (onChange) => {
+              this.onActivate = onChange
+              return () => (this.onActivate = undefined)
+            },
+            () => this.activeConnector[1]
+          )
+          return Reflect.get(hooks, p, receiver)()
+        }
+      },
+    }
+  ) as (typeof this.activeConnector)[1]
+
+  private onActivate?: () => void
+
+  overrideActivate = (chainId?: ChainId) => {
+    // Always re-create the connector, so that the chainId is updated.
+    this.activeConnector = initializeConnector((actions) => this.initializer(actions, chainId))
+    this.onActivate?.()
+    return false
+  }
+
+  get connector() {
+    return this.proxyConnector
+  }
+  get hooks() {
+    return this.proxyHooks
+  }
+})()
+
 const [web3CoinbaseWallet, web3CoinbaseWalletHooks] = initializeConnector<CoinbaseWallet>(
   (actions) =>
     new CoinbaseWallet({
@@ -97,7 +159,13 @@ const coinbaseWalletConnection: Connection = {
   },
 }
 
-export const connections = [gnosisSafeConnection, injectedConnection, coinbaseWalletConnection, networkConnection]
+export const connections = [
+  gnosisSafeConnection,
+  injectedConnection,
+  coinbaseWalletConnection,
+  walletConnectV2Connection,
+  networkConnection,
+]
 
 export function getConnection(c: Connector | ConnectionType) {
   if (c instanceof Connector) {
@@ -116,6 +184,8 @@ export function getConnection(c: Connector | ConnectionType) {
         return networkConnection
       case ConnectionType.GNOSIS_SAFE:
         return gnosisSafeConnection
+      case ConnectionType.WALLET_CONNECT_V2:
+        return walletConnectV2Connection
     }
   }
 }

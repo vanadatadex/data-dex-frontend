@@ -1,4 +1,4 @@
-import { Trans } from '@lingui/macro'
+import { Trans } from '@lingui/react'
 import { useWeb3React } from '@web3-react/core'
 import { RowFixed } from 'components/Row'
 import { getChainInfo } from 'constants/chainInfo'
@@ -148,7 +148,7 @@ export default function Polling() {
         <StyledPollingBlockNumber breathe={isMounting} hovering={isHover} warning={warning}>
           <ExternalLink href={blockExternalLinkHref}>
             <MouseoverTooltip
-              text={<Trans>The most recent block number on this network. Prices update on every block.</Trans>}
+              text={<Trans id="The most recent block number on this network. Prices update on every block.</Trans>}
             >
               {blockNumber}&ensp;
             </MouseoverTooltip>

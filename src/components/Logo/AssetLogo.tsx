@@ -70,7 +70,7 @@ const L2NetworkLogo = styled.div<{ networkUrl?: string; parentSize: string }>`
 export default function AssetLogo({
   isNative,
   address,
-  chainId = ChainId.MAINNET,
+  chainId = ChainId.VANA,
   symbol,
   backupImg,
   size = '24px',
