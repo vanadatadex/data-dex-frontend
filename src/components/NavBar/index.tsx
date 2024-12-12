@@ -32,7 +32,7 @@ interface MenuItemProps {
 }
 
 const getInfoUrl = (chainId: number | undefined) => {
-  const baseUrl = 'https://datadex-info.netlify.app'
+  const baseUrl = 'https://info.data-dex.io'
   if (!chainId) return baseUrl
 
   switch (chainId) {

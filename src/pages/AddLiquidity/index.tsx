@@ -31,7 +31,6 @@ import { ButtonError, ButtonLight, ButtonPrimary, ButtonText } from '../../compo
 import { BlueCard, OutlineCard, YellowCard } from '../../components/Card'
 import { AutoColumn } from '../../components/Column'
 import CurrencyInputPanel from '../../components/CurrencyInputPanel'
-import FeeSelector from '../../components/FeeSelector'
 import HoverInlineText from '../../components/HoverInlineText'
 import { AddRemoveTabs } from '../../components/NavigationTabs'
 import { PositionPreview } from '../../components/PositionPreview'
@@ -212,15 +211,34 @@ function AddLiquidity() {
     outOfRange ? ZERO_PERCENT : DEFAULT_ADD_IN_RANGE_SLIPPAGE_TOLERANCE
   )
 
+  // Modify the error message logic to only check for native token requirement
+  // const customErrorMessage = useMemo(() => {
+  //   if (!account) {
+  //     return <Trans>Connect Wallet</Trans>
+  //   }
+  //   if (!baseCurrency || !quoteCurrency) {
+  //     return <Trans>Select a token pair</Trans>
+  //   }
+  //   if (!baseCurrency.isNative && !quoteCurrency.isNative) {
+  //     return <Trans>One token must be the native token</Trans>
+  //   }
+  //   if (invalidRange) {
+  //     return <Trans>Invalid price range</Trans>
+  //   }
+  //   if (!parsedAmounts[Field.CURRENCY_A] || !parsedAmounts[Field.CURRENCY_B]) {
+  //     return <Trans>Enter an amount</Trans>
+  //   }
+  //   return null
+  // }, [account, baseCurrency, quoteCurrency, invalidRange, parsedAmounts])
+
+  // Modify onAdd to allow pool creation but keep the native token requirement
   async function onAdd() {
     if (!chainId || !provider || !account) return
-
-    if (!positionManager || !baseCurrency || !quoteCurrency) {
-      return
-    }
+    if (!positionManager || !baseCurrency || !quoteCurrency) return
 
     if (position && account && deadline) {
       const useNative = baseCurrency.isNative ? baseCurrency : quoteCurrency.isNative ? quoteCurrency : undefined
+
       const { calldata, value } =
         hasExistingPosition && tokenId
           ? NonfungiblePositionManager.addCallParameters(position, {
@@ -339,38 +357,42 @@ function AddLiquidity() {
     [chainId]
   )
 
+  // Modify handleCurrencyASelect to only allow native token
   const handleCurrencyASelect = useCallback(
     (currencyANew: Currency) => {
+      // // Only allow native token for currency A
+      // if (!currencyANew.isNative) return
+
       const [idA, idB] = handleCurrencySelect(currencyANew, currencyIdB)
       if (idB === undefined) {
         navigate(`/add/${idA}`)
       } else {
-        navigate(`/add/${idA}/${idB}`)
+        navigate(`/add/${idA}/${idB}/3000`)
       }
     },
     [handleCurrencySelect, currencyIdB, navigate]
   )
 
+  // Modify handleCurrencyBSelect to restrict native token
   const handleCurrencyBSelect = useCallback(
     (currencyBNew: Currency) => {
+      // Don't allow native token for currency B
+      // if (currencyBNew.isNative) return
+
       const [idB, idA] = handleCurrencySelect(currencyBNew, currencyIdA)
       if (idA === undefined) {
         navigate(`/add/${idB}`)
       } else {
-        navigate(`/add/${idA}/${idB}`)
+        navigate(`/add/${idA}/${idB}/3000`)
       }
     },
     [handleCurrencySelect, currencyIdA, navigate]
   )
 
-  const handleFeePoolSelect = useCallback(
-    (newFeeAmount: FeeAmount) => {
-      onLeftRangeInput('')
-      onRightRangeInput('')
-      navigate(`/add/${currencyIdA}/${currencyIdB}/${newFeeAmount}`)
-    },
-    [currencyIdA, currencyIdB, navigate, onLeftRangeInput, onRightRangeInput]
-  )
+  // Remove fee selector callback since we're forcing 0.3%
+  // const handleFeePoolSelect = useCallback((newFeeAmount: FeeAmount) => {
+  //   // No-op - fees are locked to 0.3%
+  // }, [])
 
   const handleDismissConfirmation = useCallback(() => {
     setShowConfirm(false)
@@ -644,12 +666,6 @@ function AddLiquidity() {
                           showCommonBases
                         />
                       </RowBetween>
-
-                      <FeeSelector
-                        disabled={!quoteCurrency || !baseCurrency}
-                        feeAmount={feeAmount}
-                        handleFeePoolSelect={handleFeePoolSelect}
-                      />
                     </AutoColumn>{' '}
                   </>
                 )}
