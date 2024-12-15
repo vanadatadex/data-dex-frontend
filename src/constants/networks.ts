@@ -111,7 +111,7 @@ export const FALLBACK_URLS = {
   ],
   [ChainId.VANA]: [
     // "Safe" URLs
-    'https://empty-green-layer.vana-mainnet.quiknode.pro/3c87e7896ce3b9b4543f43e61b1b1d61fc5ba43f',
+    'https://rpc-cs.vana.org',
     // "Fallback" URLs
     'https://rpc.islander.vana.org',
   ],
