@@ -130,6 +130,16 @@ export const MenuDropdown = () => {
                 <SecondaryLinkedText href="https://docs.datadex.me/">
                   <Trans>Documentation</Trans> ↗
                 </SecondaryLinkedText>
+                <PrimaryMenuRow to="/privacy-policy">
+                  <PrimaryMenuRow.Text>
+                    <Trans>Privacy Policy</Trans>
+                  </PrimaryMenuRow.Text>
+                </PrimaryMenuRow>
+                <PrimaryMenuRow to="/terms-of-use">
+                  <PrimaryMenuRow.Text>
+                    <Trans>Terms of Use</Trans>
+                  </PrimaryMenuRow.Text>
+                </PrimaryMenuRow>
               </Box>
               <IconRow>
                 <Icon href="https://discord.gg/withvana">
