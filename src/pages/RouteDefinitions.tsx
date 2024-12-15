@@ -15,9 +15,10 @@ const WhatIsHorswap = lazy(() => import('pages/WhatIsHorswap'))
 const PositionPage = lazy(() => import('pages/Pool/PositionPage'))
 const PoolV2 = lazy(() => import('pages/Pool/v2'))
 const PoolFinder = lazy(() => import('pages/PoolFinder'))
+const PrivacyPolicy = lazy(() => import('pages/PrivacyPolicy'))
 const RemoveLiquidity = lazy(() => import('pages/RemoveLiquidity'))
 const RemoveLiquidityV3 = lazy(() => import('pages/RemoveLiquidity/V3'))
-
+const TermsOfUse = lazy(() => import('pages/TermsOfUse'))
 interface RouterConfig {
   hash?: string
 }
@@ -68,6 +69,8 @@ export const routes: RouteDefinition[] = [
   createRouteDefinition({ path: '/pools/v2', getElement: () => <PoolV2 /> }),
   createRouteDefinition({ path: '/pools', getElement: () => <Pool /> }),
   createRouteDefinition({ path: '/pools/:tokenId', getElement: () => <PositionPage /> }),
+  createRouteDefinition({ path: '/privacy-policy', getElement: () => <PrivacyPolicy /> }),
+  createRouteDefinition({ path: '/terms-of-use', getElement: () => <TermsOfUse /> }),
   createRouteDefinition({ path: '/whatishorswap', getElement: () => <WhatIsHorswap /> }),
   createRouteDefinition({
     path: '/add/v2',
