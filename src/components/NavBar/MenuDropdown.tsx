@@ -127,7 +127,7 @@ export const MenuDropdown = () => {
                 alignItems={{ sm: 'center', md: 'flex-start' }}
                 paddingX="8"
               >
-                <SecondaryLinkedText href="https://docs.vana.org/">
+                <SecondaryLinkedText href="https://docs.datadex.me/">
                   <Trans>Documentation</Trans> ↗
                 </SecondaryLinkedText>
               </Box>
@@ -135,10 +135,10 @@ export const MenuDropdown = () => {
                 <Icon href="https://discord.gg/withvana">
                   <DiscordIconMenu className={styles.hover} width={24} height={24} color={themeVars.colors.neutral2} />
                 </Icon>
-                <Icon href="https://x.com/withvana">
+                <Icon href="https://x.com/vanadatadex">
                   <TwitterIconMenu className={styles.hover} width={24} height={24} color={themeVars.colors.neutral2} />
                 </Icon>
-                <Icon href="https://github.com/vana-com">
+                <Icon href="https://github.com/centfinance/data-dex-frontend">
                   <GithubIconMenu className={styles.hover} width={24} height={24} color={themeVars.colors.neutral2} />
                 </Icon>
               </IconRow>
