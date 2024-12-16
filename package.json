@@ -197,7 +197,7 @@
     "@uniswap/v3-periphery": "^1.1.1",
     "@uniswap/v3-sdk": "3.11.0",
     "@vanadex/sdk-core": "4.2.1",
-    "@vanadex/smart-order-router": "3.15.6",
+    "@vanadex/smart-order-router": "3.15.7",
     "@vanadex/universal-router-sdk": "1.5.8",
     "@vanilla-extract/css": "^1.12.0",
     "@vanilla-extract/css-utils": "^0.1.3",

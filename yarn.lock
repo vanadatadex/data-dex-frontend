@@ -8277,7 +8277,7 @@ __metadata:
     "@uniswap/v3-periphery": ^1.1.1
     "@uniswap/v3-sdk": 3.11.0
     "@vanadex/sdk-core": 4.2.1
-    "@vanadex/smart-order-router": 3.15.6
+    "@vanadex/smart-order-router": 3.15.7
     "@vanadex/universal-router-sdk": 1.5.8
     "@vanilla-extract/css": ^1.12.0
     "@vanilla-extract/css-utils": ^0.1.3
@@ -8418,9 +8418,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@vanadex/smart-order-router@npm:3.15.6":
-  version: 3.15.6
-  resolution: "@vanadex/smart-order-router@npm:3.15.6"
+"@vanadex/smart-order-router@npm:3.15.7":
+  version: 3.15.7
+  resolution: "@vanadex/smart-order-router@npm:3.15.7"
   dependencies:
     "@uniswap/default-token-list": ^11.2.0
     "@uniswap/permit2-sdk": ^1.2.0
@@ -8448,7 +8448,7 @@ __metadata:
     stats-lite: ^2.2.0
   peerDependencies:
     jsbi: ^3.2.0
-  checksum: 0696ef0e2d33143808eff71e94df7f11bc60a23249f7495caa1e153e5ee7707d463018ebfb9b9d2ce5ba15f4e4c44c85ccec8bcb50510e36f3c1e75622f1c561
+  checksum: f59de8a8b5d7bed8ba2a1e84c8496099b8c4927ae6a7f35b2a095f03c58e9f5bec3af7196820053e2ef7f7222c91f1a5181c707d4c610ffdb9a1703561936810
   languageName: node
   linkType: hard
 
