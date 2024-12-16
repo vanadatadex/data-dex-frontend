@@ -246,10 +246,11 @@ const CHAIN_INFO: ChainInfoMap = {
   [ChainId.VANA]: {
     networkType: NetworkType.L1,
     blockWaitMsBeforeWarning: ms(`10m`),
+    bridge: 'https://stargate.finance/bridge?srcChain=vana',
     defaultListUrl: VANA_MOKSHA_LIST,
-    docs: 'https://docs.uniswap.org/',
+    docs: 'https://docs.datadex.me/',
     explorer: 'https://islander.vanascan.io/',
-    infoLink: 'https://info.uniswap.org/#/',
+    infoLink: 'https://info.datadex.me/',
     label: 'Vana',
     logoUrl: vanaLogoUrl,
     circleLogoUrl: vanaLogoUrl,

@@ -81,7 +81,13 @@ export const USDC_BASE = new Token(
   'USDbC'
 )
 
-export const USDC_VANA = new Token(ChainId.VANA, '0x1Fe0eBD7B53fC434Ea0a69074406503F9Ab0e2FC', 18, 'tUSDC', 'Test USDC')
+export const USDC_VANA = new Token(
+  ChainId.VANA,
+  '0xf1815bd50389c46847f0bda824ec8da914045d14',
+  6,
+  'USDC.e',
+  'Bridged USDC (Stargate)'
+)
 
 export const USDC_VANA_MOKSHA = new Token(
   ChainId.VANA_MOKSHA,

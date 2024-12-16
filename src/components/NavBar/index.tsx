@@ -94,6 +94,9 @@ export const PageTabs = () => {
       <ExternalMenuItem href={infoUrl}>
         <Trans>Info</Trans>
       </ExternalMenuItem>
+      <ExternalMenuItem href="https://stargate.finance/bridge?srcChain=vana">
+        <Trans>Bridge</Trans>
+      </ExternalMenuItem>
       <Box marginY="4">
         <MenuDropdown />
       </Box>
