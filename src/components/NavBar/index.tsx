@@ -33,7 +33,7 @@ interface MenuItemProps {
 }
 
 const getInfoUrl = (chainId: number | undefined) => {
-  const baseUrl = 'https://info.datadex.me'
+  const baseUrl = 'https://info.datadex.com'
   if (!chainId) return baseUrl
 
   switch (chainId) {

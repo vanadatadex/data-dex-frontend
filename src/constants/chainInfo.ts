@@ -250,7 +250,7 @@ const CHAIN_INFO: ChainInfoMap = {
     defaultListUrl: VANA_MOKSHA_LIST,
     docs: 'https://docs.datadex.me/',
     explorer: 'https://islander.vanascan.io/',
-    infoLink: 'https://info.datadex.me/',
+    infoLink: 'https://info.datadex.com/',
     label: 'Vana',
     logoUrl: vanaLogoUrl,
     circleLogoUrl: vanaLogoUrl,
