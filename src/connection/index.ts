@@ -5,6 +5,7 @@ import { GnosisSafe } from '@web3-react/gnosis-safe'
 import { MetaMask } from '@web3-react/metamask'
 import { Network } from '@web3-react/network'
 import { Actions, Connector } from '@web3-react/types'
+import CAPSULE_ICON from 'assets/images/capsule-icon.svg'
 import GNOSIS_ICON from 'assets/images/gnosis.png'
 import HORSWAP_LOGO from 'assets/svg/logo.svg'
 import COINBASE_ICON from 'assets/wallets/coinbase-icon.svg'
@@ -14,6 +15,7 @@ import { isMobile } from 'utils/userAgent'
 
 import { RPC_URLS } from '../constants/networks'
 import { RPC_PROVIDERS } from '../constants/providers'
+import { CapsuleConnector } from './CapsuleConnector'
 import { Connection, ConnectionType } from './types'
 import { getInjection, getIsCoinbaseWallet, getIsInjected, getIsMetaMaskWallet } from './utils'
 import { WalletConnectV2 } from './WalletConnectV2'
@@ -159,11 +161,25 @@ const coinbaseWalletConnection: Connection = {
   },
 }
 
+const [web3Capsule, web3CapsuleHooks] = initializeConnector<CapsuleConnector>(
+  (actions) => new CapsuleConnector({ actions, onError })
+)
+
+const capsuleConnection: Connection = {
+  getName: () => 'Capsule',
+  connector: web3Capsule,
+  hooks: web3CapsuleHooks,
+  type: ConnectionType.CAPSULE,
+  getIcon: () => CAPSULE_ICON,
+  shouldDisplay: () => true,
+}
+
 export const connections = [
   gnosisSafeConnection,
   injectedConnection,
   coinbaseWalletConnection,
   walletConnectV2Connection,
+  capsuleConnection,
   networkConnection,
 ]
 
@@ -186,6 +202,8 @@ export function getConnection(c: Connector | ConnectionType) {
         return gnosisSafeConnection
       case ConnectionType.WALLET_CONNECT_V2:
         return walletConnectV2Connection
+      case ConnectionType.CAPSULE:
+        return capsuleConnection
     }
   }
 }

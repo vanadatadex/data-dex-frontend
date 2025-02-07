@@ -7,7 +7,6 @@ const path = require('path')
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin')
 const { IgnorePlugin, ProvidePlugin } = require('webpack')
 const { RetryChunkLoadPlugin } = require('webpack-retry-chunk-load-plugin')
-// const webpack = require('webpack')
 
 const commitHash = execSync('git rev-parse HEAD').toString().trim()
 const isProduction = process.env.NODE_ENV === 'production'
@@ -71,6 +70,7 @@ module.exports = {
       new ProvidePlugin({
         // - react-markdown requires process.cwd
         process: 'process/browser.js',
+        Buffer: ['buffer', 'Buffer'],
       }),
       new VanillaExtractPlugin(),
       new RetryChunkLoadPlugin({
@@ -132,11 +132,17 @@ module.exports = {
         }),
         // Webpack 5 does not resolve node modules, so we do so for those necessary:
         fallback: {
-          // - react-markdown requires path
           path: require.resolve('path-browserify'),
+          crypto: require.resolve('crypto-browserify'),
+          buffer: require.resolve('buffer/'),
+          stream: require.resolve('stream-browserify'),
           fs: false,
           https: false,
           http: false,
+        },
+        alias: {
+          ...webpackConfig.resolve.alias,
+          'ethers/lib/utils': 'ethers/lib/utils.js',
         },
       })
 

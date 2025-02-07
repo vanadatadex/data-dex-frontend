@@ -9,6 +9,7 @@ export enum ConnectionType {
   WALLET_CONNECT_V2 = 'WALLET_CONNECT_V2',
   NETWORK = 'NETWORK',
   GNOSIS_SAFE = 'GNOSIS_SAFE',
+  CAPSULE = 'CAPSULE',
 }
 
 export function toConnectionType(value = ''): ConnectionType | undefined {
