@@ -127,7 +127,7 @@ export const MenuDropdown = () => {
                 alignItems={{ sm: 'center', md: 'flex-start' }}
                 paddingX="8"
               >
-                <SecondaryLinkedText href="https://docs.datadex.me/">
+                <SecondaryLinkedText href="https://docs.datadex.com/">
                   <Trans>Documentation</Trans> ↗
                 </SecondaryLinkedText>
                 <PrimaryMenuRow to="/privacy-policy">

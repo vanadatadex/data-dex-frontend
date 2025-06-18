@@ -248,7 +248,7 @@ const CHAIN_INFO: ChainInfoMap = {
     blockWaitMsBeforeWarning: ms(`10m`),
     bridge: 'https://stargate.finance/bridge?srcChain=vana',
     defaultListUrl: VANA_MOKSHA_LIST,
-    docs: 'https://docs.datadex.me/',
+    docs: 'https://docs.datadex.com/',
     explorer: 'https://islander.vanascan.io/',
     infoLink: 'https://info.datadex.com/',
     label: 'Vana',
