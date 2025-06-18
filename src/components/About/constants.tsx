@@ -43,7 +43,7 @@ export const MORE_CARDS = [
     cta: 'Provide liquidity',
   },
   {
-    to: 'https://docs.datadex.me',
+    to: 'https://docs.datadex.com',
     external: true,
     title: 'Build dApps',
     description: 'Build apps and tools on the largest DeFi protocol on Vana.',
