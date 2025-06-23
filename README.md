@@ -35,8 +35,10 @@ yarn start
 App will be served at:
 http://localhost:3000
 
+---
 
-📁 Project Structure
+## 📁 Project Structure
+
 src/ – main application logic
 
 public/ – static assets (favicon, manifest, logos)
@@ -45,17 +47,23 @@ abis/ – on-chain contract interfaces (ERC20, routers, etc.)
 
 constants/ – chain config, tokens, supported features
 
-📦 Tokenlist Integration
+---
+
+## 📦 Tokenlist Integration
+
 Token list is expected to follow the Uniswap Token List specification.
 
-🛡 License
+## 🛡 License
+
 This project is licensed under GPL-3.0.
 
-🙌 Acknowledgements
+## 🙌 Acknowledgements
+
 This interface is based on the amazing work of Uniswap Labs.
 We thank them for making the original version open source.
 
-🌐 Learn More
+## 🌐 Learn More
+
 Main Site: https://datadex.com
 
 Analytics Dashboard: https://info.datadex.com/#/vana
