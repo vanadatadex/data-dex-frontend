@@ -1,19 +1,31 @@
-# Vana Data DEx
+# Vana DataDex – Swap & Liquidity UI
 
-An open source interface for Uniswap -- a protocol for decentralized exchange of Ethereum tokens.
+This is the official frontend for the **Vana DataDex**, a decentralized interface for swapping tokens and managing liquidity on the VANA network.
 
-The Data DEX frontend is a fork of [Uniswap Interface v4.266.2](https://github.com/Uniswap/interface/releases/tag/v4.266.2). The version v4.266.2 is the last version without added UI fees and that would still allow users to do local routing. Data DEX has then significantly improved the interface's censorship resistance and privacy.
+It is a fork of [Uniswap Interface v4.266.2](https://github.com/Uniswap/interface) — the last version that:
+- Does **not include UI fee logic**
+- Supports **fully local routing**
 
-Here are the significant changes:
-- Changed Uniswap branding to Vana Data DEX branding
-- Removed Uniswap privacy policy
-- Removed all analytics queries (Uniswap interface is really noisy in reporting everything you do to their analytics system)
-- Removed copyright notices for Uniswap
-- Removed external routing, all routing is done using the default RPC or users wallet RPC
-- Removed UniswapX (UniswapX depends on centralized servers)
-- Settings have been moved to where the mini portfolio used to be
-- Changed token pricing to be from a simulated swap with USDC, and it is shown to users that this is in USDC (not in dollars)
-- Removed claim UNI tokens popup
+---
 
-You can see all the changes by [comparing Horseswap to Uniswap Interface V4.266.2](https://github.com/Uniswap/interface/compare/v4.266.2...DarkFlorist:Horswap:main)
+## 🚀 Features
 
+- ✅ **Uniswap V3 core functionality**: swap, pool creation, liquidity management
+- 🎯 **VANA network integration** (RPC, token pricing, custom chain config)
+- 🧠 **Privacy-first**: all analytics tracking and external API calls removed
+- 💡 **Local routing**: no external relayers or UniswapX dependency
+- 🧼 Cleaned up: removed Uniswap-specific branding, popups, and external UX
+- 🛠 Settings moved to a cleaner location (formerly mini portfolio)
+
+---
+
+## 🔧 Getting Started
+
+> You must have [Node.js](https://nodejs.org/) and [Yarn](https://yarnpkg.com/) installed.
+
+```bash
+# Install dependencies
+yarn
+
+# Start local development server
+yarn start
