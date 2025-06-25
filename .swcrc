@@ -10,18 +10,7 @@
     "target": "es2020",
     "keepClassNames": true,
     "experimental": {
-      "plugins": [
-        [
-          "@lingui/swc-plugin",
-          {}
-        ],
-        [
-          "@swc/plugin-styled-components",
-          {
-            "displayName": true
-          }
-        ]
-      ]
+      "plugins": []
     },
     "parser": {
       "syntax": "typescript",

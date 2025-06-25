@@ -137,6 +137,11 @@ module.exports = {
           fs: false,
           https: false,
           http: false,
+          crypto: false,
+          stream: false,
+          constants: false,
+          os: false,
+          module: false,
         },
       })
 
@@ -149,8 +154,9 @@ module.exports = {
       // Configure webpack transpilation (create-react-app specifies transpilation rules in a oneOf):
       webpackConfig.module.rules[1].oneOf = webpackConfig.module.rules[1].oneOf.map((rule) => {
         if (rule.loader && rule.loader.match(/babel-loader/)) {
-          rule.loader = 'swc-loader'
-          delete rule.options
+          // Keep babel-loader for Lingui macro support
+          // rule.loader = 'swc-loader'
+          // delete rule.options
         }
         return rule
       })
