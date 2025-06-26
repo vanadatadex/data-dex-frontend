@@ -23,7 +23,7 @@
     "typecheck:cloud": "tsc -p functions/tsconfig.json",
     "typecheck:cypress": "tsc -p cypress/tsconfig.json",
     "start": "cross-env NODE_OPTIONS=\"--max-old-space-size=8192\" react-app-rewired start",
-    "build": "cross-env NODE_OPTIONS=\"--max-old-space-size=8192\" react-app-rewired build",
+    "build": "cross-env NODE_OPTIONS=\"--max-old-space-size=8192\" craco build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "test:cloud": "yarn jest functions --config=functions/jest.config.json",
