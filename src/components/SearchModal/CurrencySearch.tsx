@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-restricted-imports
-import { t, Trans } from '@lingui/macro'
+import { Trans } from '@lingui/macro'
 import { Currency, Token } from '@vanadex/sdk-core'
 import { useWeb3React } from '@web3-react/core'
 import useDebounce from 'hooks/useDebounce'
@@ -157,7 +157,7 @@ export function CurrencySearch({
             type="text"
             id="token-search-input"
             data-testid="token-search-input"
-            placeholder={t`Search name or paste address`}
+            placeholder="Search name or paste address"
             autoComplete="off"
             value={searchQuery}
             ref={inputRef as RefObject<HTMLInputElement>}

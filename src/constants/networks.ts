@@ -1,4 +1,4 @@
-import { ChainId } from '@vanadex/sdk-core'
+import { ChainId } from "@vanadex/sdk-core";
 
 /**
  * Fallback JSON-RPC endpoints.
@@ -13,66 +13,66 @@ import { ChainId } from '@vanadex/sdk-core'
 export const FALLBACK_URLS = {
   [ChainId.MAINNET]: [
     // "Safe" URLs
-    'https://cloudflare-eth.com',
+    "https://cloudflare-eth.com",
     // "Fallback" URLs
-    'https://rpc.ankr.com/eth',
-    'https://eth-mainnet.public.blastapi.io',
+    "https://rpc.ankr.com/eth",
+    "https://eth-mainnet.public.blastapi.io",
   ],
   [ChainId.GOERLI]: [
     // "Safe" URLs
-    'https://rpc.goerli.mudit.blog/',
+    "https://rpc.goerli.mudit.blog/",
     // "Fallback" URLs
-    'https://rpc.ankr.com/eth_goerli',
+    "https://rpc.ankr.com/eth_goerli",
   ],
   [ChainId.SEPOLIA]: [
     // "Safe" URLs
-    'https://rpc.sepolia.dev/',
+    "https://rpc.sepolia.dev/",
     // "Fallback" URLs
-    'https://rpc.sepolia.org/',
-    'https://rpc2.sepolia.org/',
-    'https://rpc.sepolia.online/',
-    'https://www.sepoliarpc.space/',
-    'https://rpc-sepolia.rockx.com/',
-    'https://rpc.bordel.wtf/sepolia',
+    "https://rpc.sepolia.org/",
+    "https://rpc2.sepolia.org/",
+    "https://rpc.sepolia.online/",
+    "https://www.sepoliarpc.space/",
+    "https://rpc-sepolia.rockx.com/",
+    "https://rpc.bordel.wtf/sepolia",
   ],
   [ChainId.POLYGON]: [
     // "Safe" URLs
-    'https://polygon-rpc.com/',
-    'https://rpc-mainnet.matic.network',
-    'https://matic-mainnet.chainstacklabs.com',
-    'https://rpc-mainnet.maticvigil.com',
-    'https://rpc-mainnet.matic.quiknode.pro',
-    'https://matic-mainnet-full-rpc.bwarelabs.com',
+    "https://polygon-rpc.com/",
+    "https://rpc-mainnet.matic.network",
+    "https://matic-mainnet.chainstacklabs.com",
+    "https://rpc-mainnet.maticvigil.com",
+    "https://rpc-mainnet.matic.quiknode.pro",
+    "https://matic-mainnet-full-rpc.bwarelabs.com",
   ],
   [ChainId.POLYGON_MUMBAI]: [
     // "Safe" URLs
-    'https://matic-mumbai.chainstacklabs.com',
-    'https://rpc-mumbai.maticvigil.com',
-    'https://matic-testnet-archive-rpc.bwarelabs.com',
+    "https://matic-mumbai.chainstacklabs.com",
+    "https://rpc-mumbai.maticvigil.com",
+    "https://matic-testnet-archive-rpc.bwarelabs.com",
   ],
   [ChainId.ARBITRUM_ONE]: [
     // "Safe" URLs
-    'https://arb1.arbitrum.io/rpc',
+    "https://arb1.arbitrum.io/rpc",
     // "Fallback" URLs
-    'https://arbitrum.public-rpc.com',
+    "https://arbitrum.public-rpc.com",
   ],
   [ChainId.ARBITRUM_GOERLI]: [
     // "Safe" URLs
-    'https://goerli-rollup.arbitrum.io/rpc',
+    "https://goerli-rollup.arbitrum.io/rpc",
   ],
   [ChainId.OPTIMISM]: [
     // "Safe" URLs
-    'https://mainnet.optimism.io/',
+    "https://mainnet.optimism.io/",
     // "Fallback" URLs
-    'https://rpc.ankr.com/optimism',
+    "https://rpc.ankr.com/optimism",
   ],
   [ChainId.OPTIMISM_GOERLI]: [
     // "Safe" URLs
-    'https://goerli.optimism.io',
+    "https://goerli.optimism.io",
   ],
   [ChainId.OPTIMISM_SEPOLIA]: [
     // "Safe" URLs
-    'https://goerli.optimism.io',
+    "https://goerli.optimism.io",
   ],
   [ChainId.CELO]: [
     // "Safe" URLs
@@ -84,53 +84,59 @@ export const FALLBACK_URLS = {
   ],
   [ChainId.BNB]: [
     // "Safe" URLs
-    'https://endpoints.omniatech.io/v1/bsc/mainnet/public',
-    'https://bsc-mainnet.gateway.pokt.network/v1/lb/6136201a7bad1500343e248d',
-    'https://1rpc.io/bnb',
-    'https://bsc-dataseed3.binance.org',
-    'https://bsc-dataseed2.defibit.io',
-    'https://bsc-dataseed1.ninicoin.io',
-    'https://binance.nodereal.io',
-    'https://bsc-dataseed4.defibit.io',
-    'https://rpc.ankr.com/bsc',
+    "https://endpoints.omniatech.io/v1/bsc/mainnet/public",
+    "https://bsc-mainnet.gateway.pokt.network/v1/lb/6136201a7bad1500343e248d",
+    "https://1rpc.io/bnb",
+    "https://bsc-dataseed3.binance.org",
+    "https://bsc-dataseed2.defibit.io",
+    "https://bsc-dataseed1.ninicoin.io",
+    "https://binance.nodereal.io",
+    "https://bsc-dataseed4.defibit.io",
+    "https://rpc.ankr.com/bsc",
   ],
   [ChainId.AVALANCHE]: [
     // "Safe" URLs
-    'https://api.avax.network/ext/bc/C/rpc',
-    'https://avalanche-c-chain.publicnode.com',
+    "https://api.avax.network/ext/bc/C/rpc",
+    "https://avalanche-c-chain.publicnode.com",
   ],
   [ChainId.BASE]: [
     // "Safe" URLs
-    'https://mainnet.base.org/',
-    'https://developer-access-mainnet.base.org/',
-    'https://base.gateway.tenderly.co',
-    'https://base.publicnode.com',
+    "https://mainnet.base.org/",
+    "https://developer-access-mainnet.base.org/",
+    "https://base.gateway.tenderly.co",
+    "https://base.publicnode.com",
     // "Fallback" URLs
-    'https://1rpc.io/base',
-    'https://base.meowrpc.com',
+    "https://1rpc.io/base",
+    "https://base.meowrpc.com",
   ],
   [ChainId.VANA]: [
     // "Safe" URLs
-    'https://rpc-cs.vana.org',
+    "https://rpc-cs.vana.org",
     // "Fallback" URLs
-    'https://rpc.islander.vana.org',
+    "https://rpc.islander.vana.org",
   ],
   [ChainId.VANA_MOKSHA]: [
     // "Safe" URLs
-    'https://rpc.moksha.vana.org',
+    "https://rpc.moksha.vana.org",
     // "Fallback" URLs
-    'https://rpc-moksha-vana.josephtran.xyz',
-    'https://moksha-vana-rpc.tech-coha05.xyz',
+    "https://rpc-moksha-vana.josephtran.xyz",
+    "https://moksha-vana-rpc.tech-coha05.xyz",
   ],
-}
+};
 
 /**
  * Known JSON-RPC endpoints.
  * These are the URLs used by the interface when there is not another available source of chain data.
  */
 export const RPC_URLS = {
-  [ChainId.MAINNET]: [`https://ethereum.keydonix.com/v1/mainnet`, ...FALLBACK_URLS[ChainId.MAINNET]],
-  [ChainId.GOERLI]: [`https://ethereum.keydonix.com/v1/goerli`, ...FALLBACK_URLS[ChainId.GOERLI]],
+  [ChainId.MAINNET]: [
+    `https://ethereum.keydonix.com/v1/mainnet`,
+    ...FALLBACK_URLS[ChainId.MAINNET],
+  ],
+  [ChainId.GOERLI]: [
+    `https://ethereum.keydonix.com/v1/goerli`,
+    ...FALLBACK_URLS[ChainId.GOERLI],
+  ],
   [ChainId.SEPOLIA]: [...FALLBACK_URLS[ChainId.SEPOLIA]],
   [ChainId.OPTIMISM]: [...FALLBACK_URLS[ChainId.OPTIMISM]],
   [ChainId.OPTIMISM_GOERLI]: [...FALLBACK_URLS[ChainId.OPTIMISM_GOERLI]],
@@ -146,4 +152,4 @@ export const RPC_URLS = {
   [ChainId.BASE]: [...FALLBACK_URLS[ChainId.BASE]],
   [ChainId.VANA]: [...FALLBACK_URLS[ChainId.VANA]],
   [ChainId.VANA_MOKSHA]: [...FALLBACK_URLS[ChainId.VANA_MOKSHA]],
-}
+};

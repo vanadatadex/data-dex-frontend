@@ -1,0 +1,76 @@
+src/pages/RemoveLiquidity/V3.tsx:213:            <Trans>Pooled {liquidityValue0?.currency?.symbol}:</Trans>
+src/pages/RemoveLiquidity/V3.tsx:224:            <Trans>Pooled {liquidityValue1?.currency?.symbol}:</Trans>
+src/pages/RemoveLiquidity/V3.tsx:240:                <Trans>{feeValue0?.currency?.symbol} Fees Earned:</Trans>
+src/pages/RemoveLiquidity/V3.tsx:251:                <Trans>{feeValue1?.currency?.symbol} Fees Earned:</Trans>
+src/pages/RemoveLiquidity/V3.tsx:326:                      <Trans>{percentForSlider}%</Trans>
+src/pages/RemoveLiquidity/V3.tsx:350:                      <Trans>Pooled {liquidityValue0?.currency?.symbol}:</Trans>
+src/pages/RemoveLiquidity/V3.tsx:361:                      <Trans>Pooled {liquidityValue1?.currency?.symbol}:</Trans>
+src/pages/RemoveLiquidity/V3.tsx:375:                          <Trans>{feeValue0?.currency?.symbol} Fees Earned:</Trans>
+src/pages/RemoveLiquidity/V3.tsx:386:                          <Trans>{feeValue1?.currency?.symbol} Fees Earned:</Trans>
+src/pages/RemoveLiquidity/V3.tsx:403:                    <Trans>Collect as {nativeWrappedSymbol}</Trans>
+src/pages/Swap/index.tsx:695:              <Trans>Connecting to {getChainInfo(switchingChain)?.label}</Trans>
+src/pages/MigrateV2/MigrateV2Pair.tsx:494:                    <Trans>V3 {invertPrice ? currency1.symbol : currency0.symbol} Price:</Trans>
+src/pages/MigrateV2/MigrateV2Pair.tsx:508:                    <Trans>{priceDifferenceFraction?.toSignificant(4)}%</Trans>
+src/pages/MigrateV2/MigrateV2Pair.tsx:523:                <Trans>V3 {invertPrice ? currency1.symbol : currency0.symbol} Price:</Trans>
+src/pages/Pool/PositionPage.tsx:691:                    <Trans>{new Percent(feeAmount, 1_000_000).toSignificant()}%</Trans>
+src/pages/Pool/PositionPage.tsx:774:                        <Trans>${fiatValueOfLiquidity.toFixed(2, { groupSeparator: ',' })}</Trans>
+src/pages/Pool/PositionPage.tsx:793:                                <Trans>{inverted ? ratio : 100 - ratio}%</Trans>
+src/pages/Pool/PositionPage.tsx:808:                                <Trans>{inverted ? 100 - ratio : ratio}%</Trans>
+src/pages/Pool/PositionPage.tsx:828:                            <Trans>${fiatValueOfFees.toFixed(2, { groupSeparator: ',' })}</Trans>
+src/pages/Pool/PositionPage.tsx:906:                          <Trans>Collect as {nativeWrappedSymbol}</Trans>
+src/pages/Pool/PositionPage.tsx:968:                        <Trans>Your position will be 100% {currencyBase?.symbol} at this price.</Trans>
+src/pages/Pool/PositionPage.tsx:997:                        <Trans>Your position will be 100% {currencyQuote?.symbol} at this price.</Trans>
+src/pages/AddLiquidityV2/ConfirmAddModalBottom.tsx:30:          <Trans>{currencies[Field.CURRENCY_A]?.symbol} Deposited</Trans>
+src/pages/AddLiquidityV2/ConfirmAddModalBottom.tsx:39:          <Trans>{currencies[Field.CURRENCY_B]?.symbol} Deposited</Trans>
+src/pages/AddLiquidityV2/ConfirmAddModalBottom.tsx:68:          <Trans>{noLiquidity ? '100' : poolTokenPercentage?.toSignificant(4)}%</Trans>
+src/pages/AddLiquidityV2/index.tsx:460:                              <Trans>Approving {currencies[Field.CURRENCY_A]?.symbol}</Trans>
+src/pages/AddLiquidityV2/index.tsx:463:                            <Trans>Approve {currencies[Field.CURRENCY_A]?.symbol}</Trans>
+src/pages/AddLiquidityV2/index.tsx:475:                              <Trans>Approving {currencies[Field.CURRENCY_B]?.symbol}</Trans>
+src/pages/AddLiquidityV2/index.tsx:478:                            <Trans>Approve {currencies[Field.CURRENCY_B]?.symbol}</Trans>
+src/pages/AddLiquidity/index.tsx:511:                      <Trans>Approving {currencies[Field.CURRENCY_A]?.symbol}</Trans>
+src/pages/AddLiquidity/index.tsx:514:                    <Trans>Approve {currencies[Field.CURRENCY_A]?.symbol}</Trans>
+src/pages/AddLiquidity/index.tsx:526:                      <Trans>Approving {currencies[Field.CURRENCY_B]?.symbol}</Trans>
+src/pages/AddLiquidity/index.tsx:529:                    <Trans>Approve {currencies[Field.CURRENCY_B]?.symbol}</Trans>
+src/pages/AddLiquidity/index.tsx:824:                            <Trans>Starting {baseCurrency?.symbol} Price:</Trans>
+src/hooks/useWrapCallback.tsx:39:      return <Trans>Enter {native?.symbol} amount</Trans>
+src/hooks/useWrapCallback.tsx:41:      return <Trans>Enter {wrapped?.symbol} amount</Trans>
+src/hooks/useWrapCallback.tsx:44:      return <Trans>Insufficient {native?.symbol} balance</Trans>
+src/hooks/useWrapCallback.tsx:46:      return <Trans>Insufficient {wrapped?.symbol} balance</Trans>
+src/components/RoutingDiagram/RoutingDiagram.tsx:144:      text={<Trans>{tokenInfo0?.symbol + '/' + tokenInfo1?.symbol + ' ' + feeAmount / 10000}% pool</Trans>}
+src/components/TransactionConfirmationModal/index.tsx:145:                  <Trans>Add {currencyToAdd.symbol}</Trans>
+src/components/TransactionConfirmationModal/index.tsx:149:                  <Trans>Added {currencyToAdd.symbol} </Trans>
+src/components/PositionCard/V2.tsx:141:                  <Trans>Pooled {currency0.symbol}:</Trans>
+src/components/PositionCard/V2.tsx:159:                  <Trans>Pooled {currency1.symbol}:</Trans>
+src/components/PositionCard/index.tsx:252:                  <Trans>Pooled {currency0.symbol}:</Trans>
+src/components/PositionCard/index.tsx:270:                  <Trans>Pooled {currency1.symbol}:</Trans>
+src/components/AccountDetails/TransactionSummary.tsx:75:    <Trans>Claim UNI reward for {ENSName ?? recipient}</Trans>
+src/components/AccountDetails/TransactionSummary.tsx:83:    <Trans>Revoke {token?.symbol}</Trans>
+src/components/AccountDetails/TransactionSummary.tsx:85:    <Trans>Approve {token?.symbol}</Trans>
+src/components/FeeSelector/FeeOption.tsx:32:            <Trans>{FEE_AMOUNT_DETAIL[feeAmount].label}%</Trans>
+src/components/FeeSelector/index.tsx:99:                    <Trans>{FEE_AMOUNT_DETAIL[feeAmount].label}% fee tier</Trans>
+src/components/Polling/ChainConnectivityWarning.tsx:69:          <Trans>{label} might be down right now, or you may have lost your network connection.</Trans>
+src/components/swap/PendingModalContent/TransitionText.tsx:71:          <Trans>{initialText}</Trans>
+src/components/swap/PendingModalContent/TransitionText.tsx:76:          <Trans>{transitionText}</Trans>
+src/components/swap/SwapRoute.tsx:70:        {Boolean(gasPrice) && <Trans>Best price route costs ~{gasPrice} in gas. </Trans>}
+src/components/swap/GasBreakdownTooltip.tsx:53:        <GasCostItem title={<Trans>Wrap {native.symbol}</Trans>} amount={wrapEstimate} />
+src/components/swap/GasBreakdownTooltip.tsx:54:        <GasCostItem title={<Trans>Allow {inputCurrency.symbol} (one time)</Trans>} amount={approvalEstimate} />
+src/components/NetworkAlert/NetworkAlert.tsx:188:                <Trans>{label} token bridge</Trans>
+src/components/NetworkAlert/NetworkAlert.tsx:191:                <Trans>Deposit tokens to the {label} network.</Trans>
+src/components/Popups/PopupContent.tsx:80:            <Trans>To use Data DEX on {chainInfo.label}, switch the network in your wallet’s settings.</Trans>
+src/components/CurrencyInputPanel/FiatValue.tsx:57:            (<Trans>{formatPriceImpact(priceImpact)}</Trans>)
+src/components/CurrencyInputPanel/index.tsx:293:                            <Trans>Balance: {formatCurrencyAmount(selectedCurrencyBalance, 4)}</Trans>
+src/components/Settings/MenuButton/index.tsx:65:        <Trans>{formatSlippage(userSlippageTolerance)} slippage</Trans>
+src/components/Settings/TransactionDeadlineSettings/index.tsx:75:      button={<Trans>{deadline / 60}m</Trans>}
+src/components/Web3Status/index.tsx:209:              <Trans>{pendingActivityCount} Pending</Trans>
+src/components/RateToggle/index.tsx:25:          <Trans>{isSorted ? currencyA.symbol : currencyB.symbol}</Trans>
+src/components/RateToggle/index.tsx:28:          <Trans>{isSorted ? currencyB.symbol : currencyA.symbol}</Trans>
+src/components/PositionPreview/index.tsx:107:              <Trans>{position?.pool?.fee / 10000}%</Trans>
+src/components/PositionPreview/index.tsx:142:                <Trans>Your position will be 100% composed of {baseCurrency?.symbol} at this price</Trans>
+src/components/PositionPreview/index.tsx:165:                <Trans>Your position will be 100% composed of {quoteCurrency?.symbol} at this price</Trans>
+src/components/ErrorBoundary/index.tsx:103:        <Trans>{isExpanded ? 'Show less' : 'Show more'}</Trans>
+src/components/PositionListItem/index.tsx:219:            <Trans>{new Percent(feeAmount, 1_000_000).toSignificant()}%</Trans>
+src/state/swap/hooks.tsx:195:      inputError = <Trans>Insufficient {balanceIn.currency.symbol} balance</Trans>
+src/state/mint/hooks.tsx:195:    error = <Trans>Insufficient {currencies[Field.CURRENCY_A]?.symbol} balance</Trans>
+src/state/mint/hooks.tsx:199:    error = <Trans>Insufficient {currencies[Field.CURRENCY_B]?.symbol} balance</Trans>
+src/state/mint/v3/hooks.tsx:468:    errorMessage = <Trans>Insufficient {currencies[Field.CURRENCY_A]?.symbol} balance</Trans>
+src/state/mint/v3/hooks.tsx:472:    errorMessage = <Trans>Insufficient {currencies[Field.CURRENCY_B]?.symbol} balance</Trans>

@@ -1,4 +1,4 @@
-import { t, Trans } from '@lingui/macro'
+import { Trans } from '@lingui/macro'
 import { useOnClickOutside } from 'hooks/useOnClickOutside'
 import { Box } from 'nft/components/Box'
 import { Column, Row } from 'nft/components/Flex'
@@ -109,7 +109,7 @@ export const MenuDropdown = () => {
   return (
     <>
       <Box position="relative" ref={ref} marginRight="4">
-        <NavIcon isActive={isOpen} onClick={toggleOpen} label={isOpen ? t`Show resources` : t`Hide resources`}>
+        <NavIcon isActive={isOpen} onClick={toggleOpen} label={isOpen ? 'Show resources' : 'Hide resources'}>
           <EllipsisIcon viewBox="0 0 20 20" width={24} height={24} />
         </NavIcon>
 

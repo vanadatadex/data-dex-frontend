@@ -18,7 +18,7 @@ const CTASection = styled.section`
   `};
 `
 
-const CTA = styled(ExternalLink)`
+const _CTA = styled(ExternalLink)`
   padding: 16px;
   border-radius: 20px;
   position: relative;
@@ -40,7 +40,7 @@ const CTA = styled(ExternalLink)`
   }
 `
 
-const HeaderText = styled(ThemedText.DeprecatedLabel)`
+const _HeaderText = styled(ThemedText.DeprecatedLabel)`
   align-items: center;
   display: flex;
   font-size: 16px;
@@ -50,7 +50,7 @@ const HeaderText = styled(ThemedText.DeprecatedLabel)`
   `};
 `
 
-const ResponsiveColumn = styled(AutoColumn)`
+const _ResponsiveColumn = styled(AutoColumn)`
   grid-template-columns: 1fr;
   width: 100%;
   gap: 8px;

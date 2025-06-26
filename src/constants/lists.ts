@@ -1,6 +1,7 @@
 export const UNI_LIST =
-  'https://raw.githubusercontent.com/centfinance/tokenlists/refs/heads/main/generated/datadex.tokenlist.json'
-export const UNI_EXTENDED_LIST = 'https://gateway.ipfs.io/ipns/extendedtokens.uniswap.org'
+  "https://raw.githubusercontent.com/centfinance/tokenlists/refs/heads/main/generated/datadex.tokenlist.json";
+export const UNI_EXTENDED_LIST =
+  "https://gateway.ipfs.io/ipns/extendedtokens.uniswap.org";
 // const AAVE_LIST = 'tokenlist.aave.eth'
 // TODO(WEB-2282): Re-enable CMC list once we have a better solution for handling large lists.
 // const CMC_ALL_LIST = 'https://s3.coinmarketcap.com/generated/dex/tokens/eth-tokens-all.json'
@@ -27,9 +28,9 @@ export const UNI_EXTENDED_LIST = 'https://gateway.ipfs.io/ipns/extendedtokens.un
 //   'https://raw.githubusercontent.com/ethereum-optimism/ethereum-optimism.github.io/master/optimism.tokenlist.json'
 
 export const VANA_MOKSHA_LIST =
-  'https://raw.githubusercontent.com/centfinance/tokenlists/refs/heads/main/generated/datadex.tokenlist.json'
+  "https://raw.githubusercontent.com/centfinance/tokenlists/refs/heads/main/generated/datadex.tokenlist.json";
 // default lists to be 'active' aka searched across
-export const DEFAULT_ACTIVE_LIST_URLS: string[] = [UNI_LIST]
+export const DEFAULT_ACTIVE_LIST_URLS: string[] = [UNI_LIST];
 export const DEFAULT_INACTIVE_LIST_URLS: string[] = [
   // UNI_EXTENDED_LIST,
   // COMPOUND_LIST,
@@ -53,6 +54,9 @@ export const DEFAULT_INACTIVE_LIST_URLS: string[] = [
   // AVALANCHE_LIST,
   // BASE_LIST,
   VANA_MOKSHA_LIST,
-]
+];
 
-export const DEFAULT_LIST_OF_LISTS: string[] = [...DEFAULT_ACTIVE_LIST_URLS, ...DEFAULT_INACTIVE_LIST_URLS]
+export const DEFAULT_LIST_OF_LISTS: string[] = [
+  ...DEFAULT_ACTIVE_LIST_URLS,
+  ...DEFAULT_INACTIVE_LIST_URLS,
+];

@@ -1,4 +1,5 @@
-import { t, Trans } from '@lingui/macro'
+import { i18n } from '@lingui/core'
+import { Trans } from '@lingui/macro'
 import { Currency, CurrencyAmount, Percent, TradeType } from '@vanadex/sdk-core'
 import { LoadingRow } from 'components/Loader/styled'
 import RouterLabel from 'components/RouterLabel'
@@ -55,7 +56,7 @@ const AutoBadge = styled(ThemedText.LabelMicro).attrs({ fontWeight: 535 })`
   padding: 0 6px;
 
   ::after {
-    content: '${t`Auto`}';
+    content: '${'Auto'}';
   }
 `
 
@@ -191,8 +192,11 @@ function getFOTLineItem({ type, trade }: SwapLineItemProps): LineItemData | unde
   const tax = isInput ? trade.inputTax : trade.outputTax
   if (tax.equalTo(0)) return
 
+  const fallbackLabel = i18n._('Token') // runtime-safe fallback translation
+  const label = currency.symbol ?? currency.name ?? fallbackLabel
+
   return {
-    Label: () => <>{t`${currency.symbol ?? currency.name ?? t`Token`} fee`}</>,
+    Label: () => <>{label} fee</>,
     TooltipBody: FOTTooltipContent,
     Value: () => <ColoredPercentRow percent={tax} />,
   }
@@ -252,5 +256,4 @@ function SwapLineItem(props: SwapLineItemProps) {
     </RowBetween>
   )
 }
-
 export default React.memo(SwapLineItem)

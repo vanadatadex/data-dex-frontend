@@ -1,4 +1,3 @@
-import { t } from '@lingui/macro'
 import { ChainId } from '@vanadex/sdk-core'
 import { useWeb3React } from '@web3-react/core'
 import { showTestnetsAtom } from 'components/AccountDrawer/TestnetsToggle'
@@ -120,7 +119,7 @@ export const ChainSelector = ({ leftAlign }: ChainSelectorProps) => {
 
   return (
     <Box position="relative" ref={ref}>
-      <MouseoverTooltip text={t`Your wallet's current network is unsupported.`} disabled={isSupported}>
+      <MouseoverTooltip text="Your wallet's current network is unsupported." disabled={isSupported}>
         <Row
           data-testid="chain-selector"
           as="button"

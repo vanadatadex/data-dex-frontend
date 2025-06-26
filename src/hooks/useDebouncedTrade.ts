@@ -1,15 +1,26 @@
-import { Currency, CurrencyAmount, Percent, TradeType } from '@vanadex/sdk-core'
-import { useWeb3React } from '@web3-react/core'
-import { WRAPPED_NATIVE_CURRENCY } from 'constants/tokens'
-import { useMemo } from 'react'
-import { ClassicTrade, InterfaceTrade, QuoteMethod, RouterPreference, TradeState } from 'state/routing/types'
-import { useRoutingAPITrade } from 'state/routing/useRoutingAPITrade'
+import {
+  Currency,
+  CurrencyAmount,
+  Percent,
+  TradeType,
+} from "@vanadex/sdk-core";
+import { useWeb3React } from "@web3-react/core";
+import { WRAPPED_NATIVE_CURRENCY } from "constants/tokens";
+import { useMemo } from "react";
+import {
+  ClassicTrade,
+  InterfaceTrade,
+  QuoteMethod,
+  RouterPreference,
+  TradeState,
+} from "state/routing/types";
+import { useRoutingAPITrade } from "state/routing/useRoutingAPITrade";
 
-import useAutoRouterSupported from './useAutoRouterSupported'
-import useDebounce from './useDebounce'
+import useAutoRouterSupported from "./useAutoRouterSupported";
+import useDebounce from "./useDebounce";
 
 // Prevents excessive quote requests between keystrokes.
-const DEBOUNCE_TIME = 350
+const DEBOUNCE_TIME = 350;
 
 export function useDebouncedTrade(
   tradeType: TradeType,
@@ -20,10 +31,10 @@ export function useDebouncedTrade(
   inputTax?: Percent,
   outputTax?: Percent
 ): {
-  state: TradeState
-  trade?: ClassicTrade
-  swapQuoteLatency?: number
-}
+  state: TradeState;
+  trade?: ClassicTrade;
+  swapQuoteLatency?: number;
+};
 /**
  * Returns the debounced v2+v3 trade for a desired swap.
  * @param tradeType whether the swap is an exact in/out
@@ -42,33 +53,32 @@ export function useDebouncedTrade(
   inputTax?: Percent,
   outputTax?: Percent
 ): {
-  state: TradeState
-  trade?: InterfaceTrade
-  method?: QuoteMethod
-  swapQuoteLatency?: number
+  state: TradeState;
+  trade?: InterfaceTrade;
+  method?: QuoteMethod;
+  swapQuoteLatency?: number;
 } {
-  const { chainId } = useWeb3React()
-  const autoRouterSupported = useAutoRouterSupported()
+  const { chainId } = useWeb3React();
+  const autoRouterSupported = useAutoRouterSupported();
 
-  const inputs = useMemo<[CurrencyAmount<Currency> | undefined, Currency | undefined]>(
-    () => [amountSpecified, otherCurrency],
-    [amountSpecified, otherCurrency]
-  )
-  const isDebouncing = useDebounce(inputs, DEBOUNCE_TIME) !== inputs
+  const inputs = useMemo<
+    [CurrencyAmount<Currency> | undefined, Currency | undefined]
+  >(() => [amountSpecified, otherCurrency], [amountSpecified, otherCurrency]);
+  const isDebouncing = useDebounce(inputs, DEBOUNCE_TIME) !== inputs;
 
   const isWrap = useMemo(() => {
-    if (!chainId || !amountSpecified || !otherCurrency) return false
-    const weth = WRAPPED_NATIVE_CURRENCY[chainId]
+    if (!chainId || !amountSpecified || !otherCurrency) return false;
+    const weth = WRAPPED_NATIVE_CURRENCY[chainId];
     return Boolean(
       (amountSpecified.currency.isNative && weth?.equals(otherCurrency)) ||
         (otherCurrency.isNative && weth?.equals(amountSpecified.currency))
-    )
-  }, [amountSpecified, chainId, otherCurrency])
+    );
+  }, [amountSpecified, chainId, otherCurrency]);
 
-  const routerPreference = RouterPreference.CLIENT
+  const routerPreference = RouterPreference.CLIENT;
 
-  const skipBothFetches = !autoRouterSupported || isWrap
-  const skipRoutingFetch = skipBothFetches || isDebouncing
+  const skipBothFetches = !autoRouterSupported || isWrap;
+  const skipRoutingFetch = skipBothFetches || isDebouncing;
 
   const routingApiTradeResult = useRoutingAPITrade(
     skipRoutingFetch,
@@ -79,7 +89,7 @@ export function useDebouncedTrade(
     account,
     inputTax,
     outputTax
-  )
+  );
 
-  return routingApiTradeResult
+  return routingApiTradeResult;
 }

@@ -1,21 +1,23 @@
-import { Percent, TradeType } from '@vanadex/sdk-core'
-import { useWeb3React } from '@web3-react/core'
-import { PermitSignature } from 'hooks/usePermitAllowance'
-import { useCallback } from 'react'
-import { InterfaceTrade } from 'state/routing/types'
-import { isClassicTrade } from 'state/routing/utils'
+import { Percent, TradeType } from "@vanadex/sdk-core";
+import { useWeb3React } from "@web3-react/core";
+import { PermitSignature } from "hooks/usePermitAllowance";
+import { useCallback } from "react";
+import { InterfaceTrade } from "state/routing/types";
+import { isClassicTrade } from "state/routing/utils";
 
-import { useTransactionAdder } from '../state/transactions/hooks'
+import { useTransactionAdder } from "../state/transactions/hooks";
 import {
   ExactInputSwapTransactionInfo,
   ExactOutputSwapTransactionInfo,
   TransactionType,
-} from '../state/transactions/types'
-import { currencyId } from '../utils/currencyId'
-import useTransactionDeadline from './useTransactionDeadline'
-import { useUniversalRouterSwapCallback } from './useUniversalRouter'
+} from "../state/transactions/types";
+import { currencyId } from "../utils/currencyId";
+import useTransactionDeadline from "./useTransactionDeadline";
+import { useUniversalRouterSwapCallback } from "./useUniversalRouter";
 
-export type SwapResult = Awaited<ReturnType<ReturnType<typeof useSwapCallback>>>
+export type SwapResult = Awaited<
+  ReturnType<ReturnType<typeof useSwapCallback>>
+>;
 
 // Returns a function that will execute a swap, if the parameters are all valid
 // and the user has approved the slippage adjusted input amount for the trade
@@ -25,26 +27,32 @@ export function useSwapCallback(
   allowedSlippage: Percent, // in bips
   permitSignature: PermitSignature | undefined
 ) {
-  const deadline = useTransactionDeadline()
+  const deadline = useTransactionDeadline();
 
-  const addTransaction = useTransactionAdder()
-  const { account, chainId } = useWeb3React()
+  const addTransaction = useTransactionAdder();
+  const { account, chainId } = useWeb3React();
 
-  const universalRouterSwapCallback = useUniversalRouterSwapCallback(isClassicTrade(trade) ? trade : undefined, {
-    slippageTolerance: allowedSlippage,
-    deadline,
-    permit: permitSignature,
-  })
+  const universalRouterSwapCallback = useUniversalRouterSwapCallback(
+    isClassicTrade(trade) ? trade : undefined,
+    {
+      slippageTolerance: allowedSlippage,
+      deadline,
+      permit: permitSignature,
+    }
+  );
 
-  const swapCallback = universalRouterSwapCallback
+  const swapCallback = universalRouterSwapCallback;
 
   return useCallback(async () => {
-    if (!trade) throw new Error('missing trade')
-    if (!account || !chainId) throw new Error('wallet must be connected to swap')
+    if (!trade) throw new Error("missing trade");
+    if (!account || !chainId)
+      throw new Error("wallet must be connected to swap");
 
-    const result = await swapCallback()
+    const result = await swapCallback();
 
-    const swapInfo: ExactInputSwapTransactionInfo | ExactOutputSwapTransactionInfo = {
+    const swapInfo:
+      | ExactInputSwapTransactionInfo
+      | ExactOutputSwapTransactionInfo = {
       type: TransactionType.SWAP,
       inputCurrencyId: currencyId(trade.inputAmount.currency),
       outputCurrencyId: currencyId(trade.outputAmount.currency),
@@ -52,18 +60,33 @@ export function useSwapCallback(
         ? {
             tradeType: TradeType.EXACT_INPUT,
             inputCurrencyAmountRaw: trade.inputAmount.quotient.toString(),
-            expectedOutputCurrencyAmountRaw: trade.postTaxOutputAmount.quotient.toString(),
-            minimumOutputCurrencyAmountRaw: trade.minimumAmountOut(allowedSlippage).quotient.toString(),
+            expectedOutputCurrencyAmountRaw:
+              trade.postTaxOutputAmount.quotient.toString(),
+            minimumOutputCurrencyAmountRaw: trade
+              .minimumAmountOut(allowedSlippage)
+              .quotient.toString(),
           }
         : {
             tradeType: TradeType.EXACT_OUTPUT,
-            maximumInputCurrencyAmountRaw: trade.maximumAmountIn(allowedSlippage).quotient.toString(),
-            outputCurrencyAmountRaw: trade.postTaxOutputAmount.quotient.toString(),
-            expectedInputCurrencyAmountRaw: trade.inputAmount.quotient.toString(),
+            maximumInputCurrencyAmountRaw: trade
+              .maximumAmountIn(allowedSlippage)
+              .quotient.toString(),
+            outputCurrencyAmountRaw:
+              trade.postTaxOutputAmount.quotient.toString(),
+            expectedInputCurrencyAmountRaw:
+              trade.inputAmount.quotient.toString(),
           }),
-    }
-    addTransaction(result.response, swapInfo, deadline?.toNumber())
+    };
+    addTransaction(result.response, swapInfo, deadline?.toNumber());
 
-    return result
-  }, [account, addTransaction, allowedSlippage, chainId, deadline, swapCallback, trade])
+    return result;
+  }, [
+    account,
+    addTransaction,
+    allowedSlippage,
+    chainId,
+    deadline,
+    swapCallback,
+    trade,
+  ]);
 }

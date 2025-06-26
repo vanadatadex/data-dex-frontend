@@ -1,4 +1,4 @@
-import { t, Trans } from '@lingui/macro'
+import { Trans } from '@lingui/macro'
 import { ChainId, Currency } from '@vanadex/sdk-core'
 import { useWeb3React } from '@web3-react/core'
 import { ColumnCenter } from 'components/Column'
@@ -131,7 +131,7 @@ function getPendingConfirmationContent({
   ContentArgs,
   'swapConfirmed' | 'swapPending' | 'trade' | 'chainId' | 'swapResult' | 'swapError'
 >): PendingModalStep {
-  const title = swapPending ? t`Swap submitted` : swapConfirmed ? t`Swap success!` : t`Confirm Swap`
+  const title = swapPending ? 'Swap submitted' : swapConfirmed ? 'Swap success!' : 'Confirm Swap'
   const tradeSummary = trade ? <TradeSummary trade={trade} /> : null
   if ((swapPending || swapConfirmed) && chainId && swapResult?.type === TradeFillType.Classic) {
     const explorerLink = (
@@ -147,7 +147,7 @@ function getPendingConfirmationContent({
       return {
         title,
         subtitle: chainId === ChainId.MAINNET ? explorerLink : tradeSummary,
-        bottomLabel: chainId === ChainId.MAINNET ? t`Transaction pending...` : explorerLink,
+        bottomLabel: chainId === ChainId.MAINNET ? 'Transaction pending...' : explorerLink,
       }
     } else {
       return {
@@ -166,13 +166,13 @@ function getPendingConfirmationContent({
         />
       ),
       subtitle: tradeSummary,
-      bottomLabel: t`Proceed in your wallet`,
+      bottomLabel: 'Proceed in your wallet',
     }
   } else {
     return {
       title,
       subtitle: tradeSummary,
-      bottomLabel: t`Proceed in your wallet`,
+      bottomLabel: 'Proceed in your wallet',
     }
   }
 }
@@ -194,36 +194,36 @@ function useStepContents(args: ContentArgs): Record<PendingConfirmModalState, Pe
   return useMemo(
     () => ({
       [ConfirmModalState.WRAPPING]: {
-        title: t`Wrap ETH`,
+        title: 'Wrap ETH',
         subtitle: (
           <ExternalLink href="https://support.uniswap.org/hc/en-us/articles/16015852009997">
             <Trans>Why is this required?</Trans>
           </ExternalLink>
         ),
-        bottomLabel: wrapPending ? t`Pending...` : t`Proceed in your wallet`,
+        bottomLabel: wrapPending ? 'Pending...' : 'Proceed in your wallet',
       },
       [ConfirmModalState.RESETTING_TOKEN_ALLOWANCE]: {
-        title: t`Reset ${approvalCurrency?.symbol}`,
-        subtitle: t`${approvalCurrency?.symbol} requires resetting approval when spending limits are too low.`,
-        bottomLabel: revocationPending ? t`Pending...` : t`Proceed in your wallet`,
+        title: `Reset ${approvalCurrency?.symbol}`,
+        subtitle: `${approvalCurrency?.symbol} requires resetting approval when spending limits are too low.`,
+        bottomLabel: revocationPending ? 'Pending...' : 'Proceed in your wallet',
       },
       [ConfirmModalState.APPROVING_TOKEN]: {
-        title: t`Enable spending ${approvalCurrency?.symbol ?? 'this token'} on The Data DEX`,
+        title: `Enable spending ${approvalCurrency?.symbol ?? 'this token'} on The Data DEX`,
         subtitle: (
           <ExternalLink href="https://support.uniswap.org/hc/en-us/articles/8120520483085">
             <Trans>Why is this required?</Trans>
           </ExternalLink>
         ),
-        bottomLabel: tokenApprovalPending ? t`Pending...` : t`Proceed in your wallet`,
+        bottomLabel: tokenApprovalPending ? 'Pending...' : 'Proceed in your wallet',
       },
       [ConfirmModalState.PERMITTING]: {
-        title: t`Allow ${approvalCurrency?.symbol ?? 'this token'} to be used for swapping`,
+        title: `Allow ${approvalCurrency?.symbol ?? 'this token'} to be used for swapping`,
         subtitle: (
           <ExternalLink href="https://support.uniswap.org/hc/en-us/articles/8120520483085">
             <Trans>Why is this required?</Trans>
           </ExternalLink>
         ),
-        bottomLabel: t`Proceed in your wallet`,
+        bottomLabel: 'Proceed in your wallet',
       },
       [ConfirmModalState.PENDING_CONFIRMATION]: getPendingConfirmationContent({
         chainId,
@@ -235,7 +235,7 @@ function useStepContents(args: ContentArgs): Record<PendingConfirmModalState, Pe
       }),
     }),
     [
-      approvalCurrency?.symbol,
+      approvalCurrency,
       chainId,
       revocationPending,
       swapConfirmed,

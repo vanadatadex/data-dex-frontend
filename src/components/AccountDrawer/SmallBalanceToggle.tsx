@@ -1,4 +1,3 @@
-import { t } from '@lingui/macro'
 import { useAtom } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
 
@@ -11,7 +10,7 @@ export function SmallBalanceToggle() {
 
   return (
     <SettingsToggle
-      title={t`Hide small balances`}
+      title="Hide small balances"
       isActive={hideSmallBalances}
       toggle={() => void updateHideSmallBalances((value) => !value)}
     />

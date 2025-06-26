@@ -1,4 +1,3 @@
-import { t } from '@lingui/macro'
 import { Box } from 'nft/components/Box'
 import { ReactNode } from 'react'
 
@@ -15,7 +14,7 @@ interface NavIconProps {
 export const NavIcon = ({
   children,
   isActive,
-  label = t`Navigation button`,
+  label = 'Navigation button',
   onClick,
   activeBackground,
 }: NavIconProps) => {

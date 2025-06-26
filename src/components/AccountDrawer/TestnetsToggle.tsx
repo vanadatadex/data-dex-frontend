@@ -1,4 +1,3 @@
-import { t } from '@lingui/macro'
 import { useAtom } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
 
@@ -11,7 +10,7 @@ export function TestnetsToggle() {
 
   return (
     <SettingsToggle
-      title={t`Show testnets`}
+      title="Show testnets"
       dataid="testnets-toggle"
       isActive={showTestnets}
       toggle={() => void updateShowTestnets((value) => !value)}

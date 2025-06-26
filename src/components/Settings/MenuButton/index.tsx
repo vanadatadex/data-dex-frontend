@@ -1,4 +1,4 @@
-import { t, Trans } from '@lingui/macro'
+import { Trans } from '@lingui/macro'
 import { Settings } from 'components/Icons/Settings'
 import Row from 'components/Row'
 import { useUserSlippageTolerance } from 'state/user/hooks'
@@ -85,7 +85,7 @@ export default function MenuButton({
       isActive={isActive}
       id="open-settings-dialog-button"
       data-testid="open-settings-dialog-button"
-      aria-label={t`Transaction Settings`}
+      aria-label="Transaction Settings"
     >
       <ButtonContent />
     </Button>
