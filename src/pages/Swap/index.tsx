@@ -233,7 +233,10 @@ function Swap({
     }),
     [initialInputCurrencyId, initialOutputCurrencyId]
   )
-  const [state, dispatch] = useReducer(swapReducer, { ...initialSwapState, ...prefilledState })
+  const [state, dispatch] = useReducer(swapReducer, {
+    ...initialSwapState,
+    ...prefilledState,
+  })
   const { typedValue, recipient, independentField } = state
 
   const previousConnectedChainId = usePrevious(connectedChainId)
@@ -417,7 +420,10 @@ function Swap({
   )
   const showMaxButton = Boolean(maxInputAmount?.greaterThan(0) && !parsedAmounts[Field.INPUT]?.equalTo(maxInputAmount))
   const swapFiatValues = useMemo(() => {
-    return { amountIn: fiatValueTradeInput.data, amountOut: fiatValueTradeOutput.data }
+    return {
+      amountIn: fiatValueTradeInput.data,
+      amountOut: fiatValueTradeOutput.data,
+    }
   }, [fiatValueTradeInput, fiatValueTradeOutput])
 
   // the callback to execute the swap
@@ -497,7 +503,10 @@ function Swap({
 
     const marketPriceImpact = trade?.priceImpact ? computeRealizedPriceImpact(trade) : undefined
     const largerPriceImpact = largerPercentValue(marketPriceImpact, preTaxStablecoinPriceImpact)
-    return { priceImpactSeverity: warningSeverity(largerPriceImpact), largerPriceImpact }
+    return {
+      priceImpactSeverity: warningSeverity(largerPriceImpact),
+      largerPriceImpact,
+    }
   }, [preTaxStablecoinPriceImpact, trade])
 
   const handleConfirmDismiss = useCallback(() => {
@@ -509,7 +518,10 @@ function Swap({
   }, [onUserInput, swapResult])
 
   const handleAcceptChanges = useCallback(() => {
-    setSwapState((currentState) => ({ ...currentState, tradeToConfirm: trade }))
+    setSwapState((currentState) => ({
+      ...currentState,
+      tradeToConfirm: trade,
+    }))
   }, [trade])
 
   const handleInputSelect = useCallback(

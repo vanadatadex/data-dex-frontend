@@ -142,13 +142,18 @@ export function ExternalLink({
   href,
   rel = 'noopener noreferrer',
   ...rest
-}: Omit<HTMLProps<HTMLAnchorElement>, 'as' | 'ref' | 'onClick'> & { href: string }) {
+}: Omit<HTMLProps<HTMLAnchorElement>, 'as' | 'ref' | 'onClick'> & {
+  href: string
+}) {
   return <StyledLink target={target} rel={rel} href={href} onClick={handleClickExternalLink} {...rest} />
 }
 
 const TOOLTIP_WIDTH = 60
 
-const ToolTipWrapper = styled.div<{ isCopyContractTooltip?: boolean; tooltipX?: number }>`
+const ToolTipWrapper = styled.div<{
+  isCopyContractTooltip?: boolean
+  tooltipX?: number
+}>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -217,7 +222,11 @@ export function CopyLinkIcon({ toCopy }: { toCopy: string }) {
     </CopyToClipboard>
   )
 }
-const CopyHelperContainer = styled.div<{ clicked: boolean; color?: string; gap: number }>`
+const CopyHelperContainer = styled.div<{
+  clicked: boolean
+  color?: string
+  gap: number
+}>`
   ${ClickableStyle}
   display: flex;
   flex-direction: row;

@@ -1,9 +1,6 @@
-import type {
-  TypedDataDomain,
-  TypedDataField,
-} from "@ethersproject/abstract-signer";
-import { _TypedDataEncoder } from "@ethersproject/hash";
-import type { JsonRpcSigner } from "@ethersproject/providers";
+import type { TypedDataDomain, TypedDataField } from '@ethersproject/abstract-signer'
+import { _TypedDataEncoder } from '@ethersproject/hash'
+import type { JsonRpcSigner } from '@ethersproject/providers'
 
 /**
  * Signs TypedData with EIP-712, if available, or else by falling back to eth_sign.
@@ -20,44 +17,27 @@ export async function signTypedData(
   value: Record<string, any>
 ) {
   // Populate any ENS names (in-place)
-  const populated = await _TypedDataEncoder.resolveNames(
-    domain,
-    types,
-    value,
-    (name: string) => {
-      return signer.provider.resolveName(name) as Promise<string>;
-    }
-  );
+  const populated = await _TypedDataEncoder.resolveNames(domain, types, value, (name: string) => {
+    return signer.provider.resolveName(name) as Promise<string>
+  })
 
-  const address = (await signer.getAddress()).toLowerCase();
-  const message = JSON.stringify(
-    _TypedDataEncoder.getPayload(populated.domain, types, populated.value)
-  );
+  const address = (await signer.getAddress()).toLowerCase()
+  const message = JSON.stringify(_TypedDataEncoder.getPayload(populated.domain, types, populated.value))
 
   try {
-    return await signer.provider.send("eth_signTypedData_v4", [
-      address,
-      message,
-    ]);
+    return await signer.provider.send('eth_signTypedData_v4', [address, message])
   } catch (error) {
     // If eth_signTypedData is unimplemented, fall back to eth_sign.
     if (
-      typeof error.message === "string" &&
+      typeof error.message === 'string' &&
       (error.message.match(/not (found|implemented)/i) ||
         error.message.match(/TrustWalletConnect.WCError error 1/) ||
         error.message.match(/Missing or invalid/))
     ) {
-      console.warn(
-        "signTypedData: wallet does not implement EIP-712, falling back to eth_sign",
-        error.message
-      );
-      const hash = _TypedDataEncoder.hash(
-        populated.domain,
-        types,
-        populated.value
-      );
-      return await signer.provider.send("eth_sign", [address, hash]);
+      console.warn('signTypedData: wallet does not implement EIP-712, falling back to eth_sign', error.message)
+      const hash = _TypedDataEncoder.hash(populated.domain, types, populated.value)
+      return await signer.provider.send('eth_sign', [address, hash])
     }
-    throw error;
+    throw error
   }
 }

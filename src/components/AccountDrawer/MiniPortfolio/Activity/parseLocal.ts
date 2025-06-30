@@ -131,7 +131,7 @@ function parseLP(
   const quoteCurrency = getCurrency(lp.quoteCurrencyId, chainId, tokens)
   const [baseRaw, quoteRaw] = [lp.expectedAmountBaseRaw, lp.expectedAmountQuoteRaw]
   const descriptor = buildCurrencyDescriptor(baseCurrency, baseRaw, quoteCurrency, quoteRaw, formatNumber, 'and')
-return { descriptor, currencies: [baseCurrency, quoteCurrency] }
+  return { descriptor, currencies: [baseCurrency, quoteCurrency] }
 }
 
 function parseCollectFees(
@@ -148,7 +148,12 @@ function parseCollectFees(
     expectedCurrencyOwed1: expectedAmountQuoteRaw,
   } = collect
   return parseLP(
-    { baseCurrencyId, quoteCurrencyId, expectedAmountBaseRaw, expectedAmountQuoteRaw },
+    {
+      baseCurrencyId,
+      quoteCurrencyId,
+      expectedAmountBaseRaw,
+      expectedAmountQuoteRaw,
+    },
     chainId,
     tokens,
     formatNumber
@@ -241,7 +246,7 @@ export function useLocalActivities(account: string): ActivityMap {
     for (const [transaction, chainId] of allTransactions) {
       if (transaction.from !== account) continue
 
-const activity = transactionToActivity(transaction, chainId, tokens, formatNumber)
+      const activity = transactionToActivity(transaction, chainId, tokens, formatNumber)
       if (activity) activityMap[transaction.hash] = activity
     }
 

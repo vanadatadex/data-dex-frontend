@@ -1,7 +1,9 @@
 import { TransactionType } from 'state/transactions/types'
 import { TransactionStatus } from 'types/types-and-hooks'
 
-const TransactionTitleTable: { [key in TransactionType]: { [state in TransactionStatus]: string } } = {
+const TransactionTitleTable: {
+  [key in TransactionType]: { [state in TransactionStatus]: string }
+} = {
   [TransactionType.SWAP]: {
     [TransactionStatus.Pending]: 'Swapping',
     [TransactionStatus.Confirmed]: 'Swapped',
@@ -109,7 +111,9 @@ const TransactionTitleTable: { [key in TransactionType]: { [state in Transaction
   },
 }
 
-export const CancelledTransactionTitleTable: { [key in TransactionType]: string } = {
+export const CancelledTransactionTitleTable: {
+  [key in TransactionType]: string
+} = {
   [TransactionType.SWAP]: 'Swap cancelled',
   [TransactionType.WRAP]: 'Wrap cancelled',
   [TransactionType.ADD_LIQUIDITY_V3_POOL]: 'Add liquidity cancelled',
@@ -133,7 +137,9 @@ export const CancelledTransactionTitleTable: { [key in TransactionType]: string 
   [TransactionType.MIGRATE_LIQUIDITY_V3]: 'Migrate liquidity cancelled',
 }
 
-const AlternateTransactionTitleTable: { [key in TransactionType]?: { [state in TransactionStatus]: string } } = {
+const AlternateTransactionTitleTable: {
+  [key in TransactionType]?: { [state in TransactionStatus]: string }
+} = {
   [TransactionType.WRAP]: {
     [TransactionStatus.Pending]: 'Unwrapping',
     [TransactionStatus.Confirmed]: 'Unwrapped',

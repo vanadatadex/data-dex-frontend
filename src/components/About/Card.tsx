@@ -8,7 +8,11 @@ export enum CardType {
   Secondary = 'Secondary',
 }
 
-const StyledCard = styled.div<{ $isDarkMode: boolean; $backgroundImgSrc?: string; $type: CardType }>`
+const StyledCard = styled.div<{
+  $isDarkMode: boolean
+  $backgroundImgSrc?: string
+  $type: CardType
+}>`
   display: flex;
   background: ${({ $isDarkMode, $backgroundImgSrc, $type, theme }) =>
     $isDarkMode

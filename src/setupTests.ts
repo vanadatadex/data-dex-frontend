@@ -86,7 +86,11 @@ jest.mock('state/routing/useRoutingAPITrade', () => {
   return {
     ...useRoutingAPITrade,
     // Prevents unit tests from logging errors from failed getQuote queries
-    useRoutingAPITrade: () => ({ state: TradeState.NO_ROUTE_FOUND, trade: undefined, currentData: undefined }),
+    useRoutingAPITrade: () => ({
+      state: TradeState.NO_ROUTE_FOUND,
+      trade: undefined,
+      currentData: undefined,
+    }),
   }
 })
 

@@ -98,7 +98,11 @@ const BG_COLORS_BY_DARK_MODE_AND_CHAIN_ID: {
   },
 }
 
-const ContentWrapper = styled.div<{ chainId: NetworkAlertChains; darkMode: boolean; logoUrl: string }>`
+const ContentWrapper = styled.div<{
+  chainId: NetworkAlertChains
+  darkMode: boolean
+  logoUrl: string
+}>`
   background: ${({ chainId, darkMode }) => BG_COLORS_BY_DARK_MODE_AND_CHAIN_ID[darkMode ? 'dark' : 'light'][chainId]};
   border-radius: 20px;
   display: flex;

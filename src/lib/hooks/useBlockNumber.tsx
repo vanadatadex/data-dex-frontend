@@ -48,7 +48,11 @@ export function BlockNumberProvider({ children }: { children: ReactNode }) {
     setChainBlock((chainBlock) => {
       if (chainBlock.chainId === chainId) {
         if (!chainBlock.block || chainBlock.block < block) {
-          return { chainId, block, mainnetBlock: chainId === ChainId.MAINNET ? block : chainBlock.mainnetBlock }
+          return {
+            chainId,
+            block,
+            mainnetBlock: chainId === ChainId.MAINNET ? block : chainBlock.mainnetBlock,
+          }
         }
       } else if (chainId === ChainId.MAINNET) {
         if (!chainBlock.mainnetBlock || chainBlock.mainnetBlock < block) {
@@ -67,7 +71,10 @@ export function BlockNumberProvider({ children }: { children: ReactNode }) {
       setChainBlock((chainBlock) => {
         // If chainId hasn't changed, don't clear the block. This prevents re-fetching still valid data.
         if (chainBlock.chainId !== activeChainId) {
-          return { chainId: activeChainId, mainnetBlock: chainBlock.mainnetBlock }
+          return {
+            chainId: activeChainId,
+            mainnetBlock: chainBlock.mainnetBlock,
+          }
         }
         return chainBlock
       })

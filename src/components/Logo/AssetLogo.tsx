@@ -44,7 +44,11 @@ export type AssetLogoBaseProps = {
   style?: React.CSSProperties
   hideL2Icon?: boolean
 }
-type AssetLogoProps = AssetLogoBaseProps & { isNative?: boolean; address?: string | null; chainId?: number }
+type AssetLogoProps = AssetLogoBaseProps & {
+  isNative?: boolean
+  address?: string | null
+  chainId?: number
+}
 
 const LogoContainer = styled.div`
   position: relative;

@@ -21,7 +21,11 @@ jest.mock('connection', () => {
     shouldDisplay: () => false,
   }
 
-  return { ConnectionType, getConnection: jest.fn(), connections: [mockConnection] }
+  return {
+    ConnectionType,
+    getConnection: jest.fn(),
+    connections: [mockConnection],
+  }
 })
 
 jest.unmock('@web3-react/core')

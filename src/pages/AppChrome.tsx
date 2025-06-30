@@ -1,5 +1,5 @@
-import Polling from "components/Polling";
-import Popups from "components/Popups";
+import Polling from 'components/Polling'
+import Popups from 'components/Popups'
 
 export default function AppChrome() {
   return (
@@ -7,5 +7,5 @@ export default function AppChrome() {
       <Popups />
       <Polling />
     </>
-  );
+  )
 }

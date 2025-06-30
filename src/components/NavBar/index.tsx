@@ -53,7 +53,11 @@ const MenuItem = ({ href, dataTestId, id, isActive, children }: MenuItemProps) =
       to={href}
       className={isActive ? styles.activeMenuItem : styles.menuItem}
       id={id}
-      style={{ textDecoration: 'none', overflow: 'hidden', whiteSpace: 'nowrap' }}
+      style={{
+        textDecoration: 'none',
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+      }}
       data-testid={dataTestId}
     >
       {children}
@@ -69,7 +73,11 @@ const ExternalMenuItem = ({ href, children }: { href: string; children: ReactNod
       target="_blank"
       rel="noopener noreferrer"
       className={styles.menuItem}
-      style={{ textDecoration: 'none', overflow: 'hidden', whiteSpace: 'nowrap' }}
+      style={{
+        textDecoration: 'none',
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+      }}
     >
       {children} ↗
     </a>

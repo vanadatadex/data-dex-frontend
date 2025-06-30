@@ -4,7 +4,12 @@ import styled from 'styled-components'
 import { escapeRegExp } from 'utils'
 import { useFormatterLocales } from 'utils/formatNumbers'
 
-const StyledInput = styled.input<{ error?: boolean; fontSize?: string; align?: string; disabled?: boolean }>`
+const StyledInput = styled.input<{
+  error?: boolean
+  fontSize?: string
+  align?: string
+  disabled?: boolean
+}>`
   color: ${({ error, theme }) => (error ? theme.critical : theme.neutral1)};
   pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
   width: 0;

@@ -13,7 +13,10 @@ type RoutingAPITradeQuoteReturn = {
   error?: { status: string; error: any }
 }
 
-type QueryState = { returnValue: Promise<RoutingAPITradeQuoteReturn>; lastPolled: number }
+type QueryState = {
+  returnValue: Promise<RoutingAPITradeQuoteReturn>
+  lastPolled: number
+}
 
 const CACHE_SIZE = 1000
 class QuoteCache {
@@ -41,12 +44,15 @@ const cache = new QuoteCache()
 
 export async function getRoutingApiQuote(
   args: GetQuoteArgs,
-  provider?: Web3Provider,
+  provider?: Web3Provider
 ): Promise<RoutingAPITradeQuoteReturn> {
   try {
     return {
       isError: true,
-      error: { status: 'NOT_IMPLEMENTED', error: 'Routing API not yet implemented' },
+      error: {
+        status: 'NOT_IMPLEMENTED',
+        error: 'Routing API not yet implemented',
+      },
     }
   } catch (error) {
     return {

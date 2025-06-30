@@ -85,7 +85,10 @@ function ColoredPercentRow({ percent }: { percent: Percent }) {
 
 function CurrencyAmountRow({ amount }: { amount: CurrencyAmount<Currency> }) {
   const { formatCurrencyAmount } = useFormatter()
-  const formattedAmount = formatCurrencyAmount({ amount, type: NumberType.SwapDetailsAmount })
+  const formattedAmount = formatCurrencyAmount({
+    amount,
+    type: NumberType.SwapDetailsAmount,
+  })
   return <>{`${formattedAmount} ${amount.currency.symbol}`}</>
 }
 
@@ -123,7 +126,10 @@ function useLineItem(props: SwapLineItemProps): LineItemData | undefined {
           return (
             <Row gap="4px">
               <img src={getChainInfo(chainId)?.logoUrl} alt="gas cost icon" width={16} height={16} />
-              {formatNumber({ input: trade.totalGasUseEstimateUSD, type: NumberType.FiatGasPrice })}
+              {formatNumber({
+                input: trade.totalGasUseEstimateUSD,
+                type: NumberType.FiatGasPrice,
+              })}
             </Row>
           )
         },
@@ -171,7 +177,11 @@ function useLineItem(props: SwapLineItemProps): LineItemData | undefined {
         loaderWidth: 70,
       }
     case SwapLineItemType.ROUTING_INFO:
-      if (isPreview || syncing) return { Label: () => <Trans>Order routing</Trans>, Value: () => <Loading /> }
+      if (isPreview || syncing)
+        return {
+          Label: () => <Trans>Order routing</Trans>,
+          Value: () => <Loading />,
+        }
       return {
         Label: () => <Trans>Order routing</Trans>,
         TooltipBody: () => {

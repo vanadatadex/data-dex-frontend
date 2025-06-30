@@ -21,7 +21,10 @@ const tokenValidatorProvider = {
   validateTokens: async () => ({ getValidationByToken: () => undefined }),
 }
 
-type RouterAndProvider = { router: AlphaRouter; provider: AppStaticJsonRpcProvider | Web3Provider }
+type RouterAndProvider = {
+  router: AlphaRouter
+  provider: AppStaticJsonRpcProvider | Web3Provider
+}
 let cachedProviderRouter: { chainId: number; routerProvider: RouterAndProvider } | undefined = undefined
 const routers = new Map<ChainId, RouterAndProvider>()
 export function getRouter(chainId: ChainId, web3Provider: Web3Provider | undefined): RouterAndProvider {
@@ -86,7 +89,11 @@ export function getRouter(chainId: ChainId, web3Provider: Web3Provider | undefin
   if (supportedChainId) {
     const provider = RPC_PROVIDERS[supportedChainId]
     const routerProvider = {
-      router: new AlphaRouter({ chainId: chainId as SupportedIds, provider, tokenValidatorProvider }),
+      router: new AlphaRouter({
+        chainId: chainId as SupportedIds,
+        provider,
+        tokenValidatorProvider,
+      }),
       provider,
     }
     routers.set(chainId, routerProvider)
@@ -104,8 +111,18 @@ async function getQuote(
     amount: amountRaw,
   }: {
     tradeType: TradeType
-    tokenIn: { address: string; chainId: number; decimals: number; symbol?: string }
-    tokenOut: { address: string; chainId: number; decimals: number; symbol?: string }
+    tokenIn: {
+      address: string
+      chainId: number
+      decimals: number
+      symbol?: string
+    }
+    tokenOut: {
+      address: string
+      chainId: number
+      decimals: number
+      symbol?: string
+    }
     amount: BigintIsh
   },
   router: AlphaRouter,

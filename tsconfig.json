@@ -27,8 +27,11 @@
     "strict": true,
     "strictNullChecks": true,
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo/build", // avoid clobbering the cypress tsbuildinfo
-    "types": ["jest"],
+    "types": ["react", "react-dom", "styled-components", "jest"],
     "useUnknownInCatchVariables": false
   },
   "include": ["src/**/*", "src/**/*.json"],
+  "exclude": [
+    "node_modules/**/*"
+  ]
 }

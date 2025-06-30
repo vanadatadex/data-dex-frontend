@@ -1,12 +1,12 @@
-import { ChainId } from "@vanadex/sdk-core";
-import AppRpcProvider from "rpc/AppRpcProvider";
-import AppStaticJsonRpcProvider from "rpc/StaticJsonRpcProvider";
+import { ChainId } from '@vanadex/sdk-core'
+import AppRpcProvider from 'rpc/AppRpcProvider'
+import AppStaticJsonRpcProvider from 'rpc/StaticJsonRpcProvider'
 
-import { SupportedInterfaceChain } from "./chains";
-import { RPC_URLS } from "./networks";
+import { SupportedInterfaceChain } from './chains'
+import { RPC_URLS } from './networks'
 
 const providerFactory = (chainId: SupportedInterfaceChain, i = 0) =>
-  new AppStaticJsonRpcProvider(chainId, RPC_URLS[chainId][i]);
+  new AppStaticJsonRpcProvider(chainId, RPC_URLS[chainId][i])
 
 /**
  * These are the only JsonRpcProviders used directly by the interface.
@@ -31,4 +31,4 @@ export const RPC_PROVIDERS = {
   // [ChainId.BASE]: providerFactory(ChainId.BASE),
   [ChainId.VANA]: providerFactory(ChainId.VANA),
   [ChainId.VANA_MOKSHA]: providerFactory(ChainId.VANA_MOKSHA),
-};
+}

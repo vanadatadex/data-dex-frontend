@@ -50,7 +50,10 @@ const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(5, 100)
 
 export default function RemoveLiquidityWrapper() {
   const { chainId } = useWeb3React()
-  const { currencyIdA, currencyIdB } = useParams<{ currencyIdA: string; currencyIdB: string }>()
+  const { currencyIdA, currencyIdB } = useParams<{
+    currencyIdA: string
+    currencyIdB: string
+  }>()
   const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
   if (isSupportedChain(chainId) && currencyA !== currencyB) {
     return <RemoveLiquidity />
@@ -61,7 +64,10 @@ export default function RemoveLiquidityWrapper() {
 
 function RemoveLiquidity() {
   const navigate = useNavigate()
-  const { currencyIdA, currencyIdB } = useParams<{ currencyIdA: string; currencyIdB: string }>()
+  const { currencyIdA, currencyIdB } = useParams<{
+    currencyIdA: string
+    currencyIdB: string
+  }>()
   const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
   const { account, chainId, provider } = useWeb3React()
   const [tokenA, tokenB] = useMemo(() => [currencyA?.wrapped, currencyB?.wrapped], [currencyA, currencyB])
@@ -678,7 +684,14 @@ function RemoveLiquidity() {
       </AppBody>
 
       {pair ? (
-        <AutoColumn style={{ minWidth: '20rem', width: '100%', maxWidth: '400px', marginTop: '1rem' }}>
+        <AutoColumn
+          style={{
+            minWidth: '20rem',
+            width: '100%',
+            maxWidth: '400px',
+            marginTop: '1rem',
+          }}
+        >
           <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} />
         </AutoColumn>
       ) : null}

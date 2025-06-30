@@ -1,15 +1,15 @@
-import { Trans } from "@lingui/macro";
-import { Currency } from "@vanadex/sdk-core";
-import { useWeb3React } from "@web3-react/core";
-import useNativeCurrency from "lib/hooks/useNativeCurrency";
-import tryParseCurrencyAmount from "lib/utils/tryParseCurrencyAmount";
-import { useMemo, useState } from "react";
+import { Trans } from '@lingui/macro'
+import { Currency } from '@vanadex/sdk-core'
+import { useWeb3React } from '@web3-react/core'
+import useNativeCurrency from 'lib/hooks/useNativeCurrency'
+import tryParseCurrencyAmount from 'lib/utils/tryParseCurrencyAmount'
+import { useMemo, useState } from 'react'
 
-import { WRAPPED_NATIVE_CURRENCY } from "../constants/tokens";
-import { useCurrencyBalance } from "../state/connection/hooks";
-import { useTransactionAdder } from "../state/transactions/hooks";
-import { TransactionType } from "../state/transactions/types";
-import { useWETHContract } from "./useContract";
+import { WRAPPED_NATIVE_CURRENCY } from '../constants/tokens'
+import { useCurrencyBalance } from '../state/connection/hooks'
+import { useTransactionAdder } from '../state/transactions/hooks'
+import { TransactionType } from '../state/transactions/types'
+import { useWETHContract } from './useContract'
 
 export enum WrapType {
   NOT_APPLICABLE,
@@ -17,7 +17,7 @@ export enum WrapType {
   UNWRAP,
 }
 
-const NOT_APPLICABLE = { wrapType: WrapType.NOT_APPLICABLE };
+const NOT_APPLICABLE = { wrapType: WrapType.NOT_APPLICABLE }
 
 enum WrapInputError {
   NO_ERROR, // must be equal to 0 so all other errors are truthy
@@ -27,27 +27,23 @@ enum WrapInputError {
   INSUFFICIENT_WRAPPED_BALANCE,
 }
 
-export function WrapErrorText({
-  wrapInputError,
-}: {
-  wrapInputError: WrapInputError;
-}) {
-  const { chainId } = useWeb3React();
-  const native = useNativeCurrency(chainId);
-  const wrapped = native?.wrapped;
+export function WrapErrorText({ wrapInputError }: { wrapInputError: WrapInputError }) {
+  const { chainId } = useWeb3React()
+  const native = useNativeCurrency(chainId)
+  const wrapped = native?.wrapped
 
   switch (wrapInputError) {
     case WrapInputError.NO_ERROR:
-      return null;
+      return null
     case WrapInputError.ENTER_NATIVE_AMOUNT:
-      return <Trans>Enter {native?.symbol} amount</Trans>;
+      return <Trans>Enter {native?.symbol} amount</Trans>
     case WrapInputError.ENTER_WRAPPED_AMOUNT:
-      return <Trans>Enter {wrapped?.symbol} amount</Trans>;
+      return <Trans>Enter {wrapped?.symbol} amount</Trans>
 
     case WrapInputError.INSUFFICIENT_NATIVE_BALANCE:
-      return <Trans>Insufficient {native?.symbol} balance</Trans>;
+      return <Trans>Insufficient {native?.symbol} balance</Trans>
     case WrapInputError.INSUFFICIENT_WRAPPED_BALANCE:
-      return <Trans>Insufficient {wrapped?.symbol} balance</Trans>;
+      return <Trans>Insufficient {wrapped?.symbol} balance</Trans>
   }
 }
 
@@ -62,37 +58,32 @@ export default function useWrapCallback(
   outputCurrency: Currency | undefined | null,
   typedValue: string | undefined
 ): {
-  wrapType: WrapType;
-  execute?: () => Promise<string | undefined>;
-  inputError?: WrapInputError;
+  wrapType: WrapType
+  execute?: () => Promise<string | undefined>
+  inputError?: WrapInputError
 } {
-  const { chainId, account } = useWeb3React();
-  const wethContract = useWETHContract();
-  const balance = useCurrencyBalance(
-    account ?? undefined,
-    inputCurrency ?? undefined
-  );
+  const { chainId, account } = useWeb3React()
+  const wethContract = useWETHContract()
+  const balance = useCurrencyBalance(account ?? undefined, inputCurrency ?? undefined)
   // we can always parse the amount typed as the input currency, since wrapping is 1:1
   const inputAmount = useMemo(
     () => tryParseCurrencyAmount(typedValue, inputCurrency ?? undefined),
     [inputCurrency, typedValue]
-  );
-  const addTransaction = useTransactionAdder();
+  )
+  const addTransaction = useTransactionAdder()
 
   // This allows an async error to propagate within the React lifecycle.
   // Without rethrowing it here, it would not show up in the UI - only the dev console.
-  const [error, setError] = useState<Error>();
-  if (error) throw error;
+  const [error, setError] = useState<Error>()
+  if (error) throw error
 
   return useMemo(() => {
-    if (!wethContract || !chainId || !inputCurrency || !outputCurrency)
-      return NOT_APPLICABLE;
-    const weth = WRAPPED_NATIVE_CURRENCY[chainId];
-    if (!weth) return NOT_APPLICABLE;
+    if (!wethContract || !chainId || !inputCurrency || !outputCurrency) return NOT_APPLICABLE
+    const weth = WRAPPED_NATIVE_CURRENCY[chainId]
+    if (!weth) return NOT_APPLICABLE
 
-    const hasInputAmount = Boolean(inputAmount?.greaterThan("0"));
-    const sufficientBalance =
-      inputAmount && balance && !balance.lessThan(inputAmount);
+    const hasInputAmount = Boolean(inputAmount?.greaterThan('0'))
+    const sufficientBalance = inputAmount && balance && !balance.lessThan(inputAmount)
 
     if (inputCurrency.isNative && weth.equals(outputCurrency)) {
       return {
@@ -100,27 +91,26 @@ export default function useWrapCallback(
         execute:
           sufficientBalance && inputAmount
             ? async () => {
-                const network = await wethContract.provider.getNetwork();
+                const network = await wethContract.provider.getNetwork()
                 if (
                   network.chainId !== chainId ||
-                  wethContract.address !==
-                    WRAPPED_NATIVE_CURRENCY[network.chainId]?.address
+                  wethContract.address !== WRAPPED_NATIVE_CURRENCY[network.chainId]?.address
                 ) {
                   const error = new Error(`Invalid WETH contract
-Please file a bug detailing how this happened - https://github.com/Uniswap/interface/issues/new?labels=bug&template=bug-report.md&title=Invalid%20WETH%20contract`);
-                  setError(error);
-                  throw error;
+Please file a bug detailing how this happened - https://github.com/Uniswap/interface/issues/new?labels=bug&template=bug-report.md&title=Invalid%20WETH%20contract`)
+                  setError(error)
+                  throw error
                 }
                 const txReceipt = await wethContract.deposit({
                   value: `0x${inputAmount.quotient.toString(16)}`,
-                });
+                })
                 addTransaction(txReceipt, {
                   type: TransactionType.WRAP,
                   unwrapped: false,
                   currencyAmountRaw: inputAmount?.quotient.toString(),
                   chainId,
-                });
-                return txReceipt.hash;
+                })
+                return txReceipt.hash
               }
             : undefined,
         inputError: sufficientBalance
@@ -128,7 +118,7 @@ Please file a bug detailing how this happened - https://github.com/Uniswap/inter
           : hasInputAmount
           ? WrapInputError.INSUFFICIENT_NATIVE_BALANCE
           : WrapInputError.ENTER_NATIVE_AMOUNT,
-      };
+      }
     } else if (weth.equals(inputCurrency) && outputCurrency.isNative) {
       return {
         wrapType: WrapType.UNWRAP,
@@ -136,19 +126,17 @@ Please file a bug detailing how this happened - https://github.com/Uniswap/inter
           sufficientBalance && inputAmount
             ? async () => {
                 try {
-                  const txReceipt = await wethContract.withdraw(
-                    `0x${inputAmount.quotient.toString(16)}`
-                  );
+                  const txReceipt = await wethContract.withdraw(`0x${inputAmount.quotient.toString(16)}`)
                   addTransaction(txReceipt, {
                     type: TransactionType.WRAP,
                     unwrapped: true,
                     currencyAmountRaw: inputAmount?.quotient.toString(),
                     chainId,
-                  });
-                  return txReceipt.hash;
+                  })
+                  return txReceipt.hash
                 } catch (error) {
-                  console.error("Could not withdraw", error);
-                  throw error;
+                  console.error('Could not withdraw', error)
+                  throw error
                 }
               }
             : undefined,
@@ -157,17 +145,9 @@ Please file a bug detailing how this happened - https://github.com/Uniswap/inter
           : hasInputAmount
           ? WrapInputError.INSUFFICIENT_WRAPPED_BALANCE
           : WrapInputError.ENTER_WRAPPED_AMOUNT,
-      };
+      }
     } else {
-      return NOT_APPLICABLE;
+      return NOT_APPLICABLE
     }
-  }, [
-    wethContract,
-    chainId,
-    inputCurrency,
-    outputCurrency,
-    inputAmount,
-    balance,
-    addTransaction,
-  ]);
+  }, [wethContract, chainId, inputCurrency, outputCurrency, inputAmount, balance, addTransaction])
 }

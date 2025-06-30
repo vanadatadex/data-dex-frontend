@@ -17,7 +17,9 @@ jest.mock('../../utils/getExplorerLink')
 
 describe('UnsupportedCurrencyFooter.tsx with unsupported tokens', () => {
   beforeEach(() => {
-    mocked(useUnsupportedTokens).mockReturnValue({ [unsupportedTokenAddress]: unsupportedToken })
+    mocked(useUnsupportedTokens).mockReturnValue({
+      [unsupportedTokenAddress]: unsupportedToken,
+    })
     mocked(getExplorerLink).mockReturnValue(unsupportedTokenExplorerLink)
   })
 

@@ -6,8 +6,8 @@ import { ZERO_PERCENT } from 'constants/misc'
 import { useRoutingAPIArguments } from 'lib/hooks/routing/useRoutingAPIArguments'
 import ms from 'ms'
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { getClientSideQuote, getRouter } from 'utils/clientSideSmartOrderRouter'
 
-import { getRoutingApiQuote } from './slice'
 import {
   GetQuoteArgs,
   INTERNAL_ROUTER_PREFERENCE_PRICE,
@@ -18,8 +18,11 @@ import {
   TradeState,
 } from './types'
 
-const TRADE_LOADING = { state: TradeState.LOADING, trade: undefined, currentData: undefined } as const
-//export const TRADE_NOT_FOUND = { state: TradeState.NO_ROUTE_FOUND, trade: undefined, currentData: undefined } as const
+const TRADE_LOADING = {
+  state: TradeState.LOADING,
+  trade: undefined,
+  currentTrade: undefined,
+} as const
 
 type RoutingAPITradeReturn = {
   state: TradeState
@@ -29,12 +32,6 @@ type RoutingAPITradeReturn = {
   swapQuoteLatency?: number
 }
 
-/**
- * Returns the best trade by invoking the routing api or the smart order router on the client
- * @param tradeType whether the swap is an exact in/out
- * @param amountSpecified the exact amount to swap in/out
- * @param otherCurrency the desired output/payment currency
- */
 export function useRoutingAPITrade<TTradeType extends TradeType>(
   skipFetch: boolean,
   tradeType: TTradeType,
@@ -45,16 +42,20 @@ export function useRoutingAPITrade<TTradeType extends TradeType>(
   inputTax = ZERO_PERCENT,
   outputTax = ZERO_PERCENT
 ): RoutingAPITradeReturn {
-  const [currencyIn, currencyOut]: [Currency | undefined, Currency | undefined] = useMemo(
+  const [currencyIn, currencyOut] = useMemo(
     () =>
       tradeType === TradeType.EXACT_INPUT
         ? [amountSpecified?.currency, otherCurrency]
         : [otherCurrency, amountSpecified?.currency],
     [amountSpecified, otherCurrency, tradeType]
   )
-  const [result, setResult] = useState<RoutingAPITradeReturn>({ state: TradeState.INVALID })
-  const timerIdRef = useRef<ReturnType<typeof setInterval> | null>(null)
-  const { provider } = useWeb3React()
+
+  const [result, setResult] = useState<RoutingAPITradeReturn>({
+    state: TradeState.INVALID,
+  })
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const { provider, chainId } = useWeb3React()
+
   const queryArgs = useRoutingAPIArguments({
     account,
     tokenIn: currencyIn,
@@ -65,63 +66,78 @@ export function useRoutingAPITrade<TTradeType extends TradeType>(
     inputTax,
     outputTax,
   })
+
+  const skip = skipFetch || queryArgs === skipToken
+
   useEffect(() => {
-    const args = queryArgs
-    if (skipFetch) return
-    if (args === skipToken) return setResult({ state: TradeState.INVALID, trade: undefined, currentTrade: undefined })
-    async function updateResults(args: GetQuoteArgs) {
-      if (document.hidden) return
-      const walletProvider = provider
-      const makePriceQuery = async () => {
-        const {
-          isError,
-          data: tradeResult,
-          error,
-          currentData,
-        } = await getRoutingApiQuote(
-          args,
-          walletProvider,
-          args.routerPreference === INTERNAL_ROUTER_PREFERENCE_PRICE ? ms(`1m`) : AVERAGE_L1_BLOCK_TIME
-        )
-        if (!args.amount || isError) {
-          return {
-            state: TradeState.INVALID,
-            trade: undefined,
-            currentTrade: currentData?.trade,
-            error: JSON.stringify(error),
-          }
-        } else if (tradeResult?.state?.state === QuoteState.NOT_FOUND) {
-          return {
+    if (skip) {
+      setResult({ state: TradeState.INVALID })
+      return
+    }
+
+    let active = true
+
+    async function fetchTrade() {
+      if (document.hidden || queryArgs === skipToken) return
+
+      const validQueryArgs = queryArgs as GetQuoteArgs
+      const pollingInterval = routerPreference === INTERNAL_ROUTER_PREFERENCE_PRICE ? ms('1m') : AVERAGE_L1_BLOCK_TIME
+
+      const start = Date.now()
+
+      try {
+        const router = getRouter(chainId!, provider)
+        const quote = await getClientSideQuote(validQueryArgs, router.router, {})
+        const latency = Date.now() - start
+
+        let newResult: RoutingAPITradeReturn
+
+        if (!validQueryArgs.amount || quote.state === QuoteState.NOT_FOUND) {
+          newResult = {
             state: TradeState.NO_ROUTE_FOUND,
             trade: undefined,
-            currentTrade: currentData?.trade,
+            currentTrade: undefined,
+            method: QuoteMethod.CLIENT_SIDE,
+            swapQuoteLatency: latency,
           }
-        } else if (!tradeResult?.trade) {
-          return TRADE_LOADING
         } else {
-          return {
+          newResult = {
             state: TradeState.VALID,
-            trade: tradeResult?.trade,
-            currentTrade: currentData?.trade,
+            trade: quote as unknown as SubmittableTrade,
+            currentTrade: quote as unknown as SubmittableTrade,
+            method: QuoteMethod.CLIENT_SIDE,
+            swapQuoteLatency: latency,
           }
         }
+
+        if (active) {
+          setResult(newResult)
+        }
+      } catch (error) {
+        console.error('SOR fetchTrade error:', error)
+        setResult({
+          state: TradeState.INVALID,
+          trade: undefined,
+          currentTrade: undefined,
+          method: QuoteMethod.CLIENT_SIDE,
+          swapQuoteLatency: Date.now() - start,
+        })
       }
-      const res = await makePriceQuery()
-      if (!active) return
-      setResult(res)
     }
-    let active = true
-    setResult(TRADE_LOADING)
-    updateResults(args)
-    timerIdRef.current = setInterval(() => {
-      // trigger price update peridiocally but don't trigger one if the tab is not active
-      if ('visibilityState' in document && document.visibilityState === 'hidden') return
-      updateResults(args)
+
+    setResult({ ...TRADE_LOADING, method: QuoteMethod.CLIENT_SIDE })
+    fetchTrade()
+
+    timerRef.current = setInterval(() => {
+      if (document.hidden) return
+      fetchTrade()
     }, AVERAGE_L1_BLOCK_TIME)
+
     return () => {
       active = false
-      if (timerIdRef.current) clearInterval(timerIdRef.current)
+      if (timerRef.current) clearInterval(timerRef.current)
     }
-  }, [queryArgs, provider, skipFetch])
+  }, [skip, queryArgs, provider, chainId, routerPreference])
+
   return result
 }

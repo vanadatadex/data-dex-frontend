@@ -1,17 +1,17 @@
-import ErrorBoundary from "components/ErrorBoundary";
-import Loader from "components/Icons/LoadingSpinner";
-import { IpfsSubpathRedirect } from "components/IpfsSubpathRedirect";
-import NavBar, { PageTabs } from "components/NavBar";
-import { lazy, Suspense, useEffect, useState } from "react";
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import styled from "styled-components";
-import DarkModeQueryParamReader from "theme/components/DarkModeQueryParamReader";
-import { flexRowNoWrap } from "theme/styles";
-import { Z_INDEX } from "theme/zIndex";
+import ErrorBoundary from 'components/ErrorBoundary'
+import Loader from 'components/Icons/LoadingSpinner'
+import { IpfsSubpathRedirect } from 'components/IpfsSubpathRedirect'
+import NavBar, { PageTabs } from 'components/NavBar'
+import { lazy, Suspense, useEffect, useState } from 'react'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import styled from 'styled-components'
+import DarkModeQueryParamReader from 'theme/components/DarkModeQueryParamReader'
+import { flexRowNoWrap } from 'theme/styles'
+import { Z_INDEX } from 'theme/zIndex'
 
-import { RouteDefinition, routes, useRouterConfig } from "./RouteDefinitions";
+import { RouteDefinition, routes, useRouterConfig } from './RouteDefinitions'
 
-const AppChrome = lazy(() => import("./AppChrome"));
+const AppChrome = lazy(() => import('./AppChrome'))
 
 const BodyWrapper = styled.div`
   display: flex;
@@ -22,16 +22,14 @@ const BodyWrapper = styled.div`
   align-items: center;
   flex: 1;
 
-  @media only screen and (max-width: ${({ theme }) =>
-      `${theme.breakpoint.md}px`}) {
+  @media only screen and (max-width: ${({ theme }) => `${theme.breakpoint.md}px`}) {
     min-height: 100vh;
   }
 
-  @media only screen and (max-width: ${({ theme }) =>
-      `${theme.breakpoint.sm}px`}) {
+  @media only screen and (max-width: ${({ theme }) => `${theme.breakpoint.sm}px`}) {
     min-height: 100vh;
   }
-`;
+`
 
 const MobileBottomBar = styled.div`
   z-index: ${Z_INDEX.sticky};
@@ -52,60 +50,53 @@ const MobileBottomBar = styled.div`
   @media screen and (min-width: ${({ theme }) => theme.breakpoint.md}px) {
     display: none;
   }
-`;
+`
 
 const HeaderWrapper = styled.div<{ transparent?: boolean; scrollY: number }>`
   ${flexRowNoWrap};
-  background-color: ${({ theme, transparent }) =>
-    !transparent && theme.surface1};
-  border-bottom: ${({ theme, transparent }) =>
-    !transparent && `1px solid ${theme.surface3}`};
+  background-color: ${({ theme, transparent }) => !transparent && theme.surface1};
+  border-bottom: ${({ theme, transparent }) => !transparent && `1px solid ${theme.surface3}`};
   width: 100%;
   justify-content: space-between;
   position: fixed;
   top: 0;
   z-index: ${Z_INDEX.dropdown};
 
-  @media only screen and (max-width: ${({ theme }) =>
-      `${theme.breakpoint.md}px`}) {
+  @media only screen and (max-width: ${({ theme }) => `${theme.breakpoint.md}px`}) {
     top: 0;
   }
 
-  @media only screen and (max-width: ${({ theme }) =>
-      `${theme.breakpoint.sm}px`}) {
+  @media only screen and (max-width: ${({ theme }) => `${theme.breakpoint.sm}px`}) {
     top: 0;
   }
-`;
+`
 
 export default function App() {
-  const location = useLocation();
-  const { pathname } = location;
-  const [scrollY, setScrollY] = useState(0);
-  const scrolledState = scrollY > 0;
-  const routerConfig = useRouterConfig();
+  const location = useLocation()
+  const { pathname } = location
+  const [scrollY, setScrollY] = useState(0)
+  const scrolledState = scrollY > 0
+  const routerConfig = useRouterConfig()
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    setScrollY(0);
-  }, [pathname]);
+    window.scrollTo(0, 0)
+    setScrollY(0)
+  }, [pathname])
 
   useEffect(() => {
     const scrollListener = () => {
-      setScrollY(window.scrollY);
-    };
-    window.addEventListener("scroll", scrollListener);
-    return () => window.removeEventListener("scroll", scrollListener);
-  }, []);
+      setScrollY(window.scrollY)
+    }
+    window.addEventListener('scroll', scrollListener)
+    return () => window.removeEventListener('scroll', scrollListener)
+  }, [])
 
-  const isHeaderTransparent = !scrolledState;
+  const isHeaderTransparent = !scrolledState
 
-  const blockedPaths = document
-    .querySelector('meta[property="x:blocked-paths"]')
-    ?.getAttribute("content")
-    ?.split(",");
-  const shouldBlockPath = blockedPaths?.includes(pathname) ?? false;
-  if (shouldBlockPath && pathname !== "/swap") {
-    return <Navigate to="/swap" replace />;
+  const blockedPaths = document.querySelector('meta[property="x:blocked-paths"]')?.getAttribute('content')?.split(',')
+  const shouldBlockPath = blockedPaths?.includes(pathname) ?? false
+  if (shouldBlockPath && pathname !== '/swap') {
+    return <Navigate to="/swap" replace />
   }
 
   return (
@@ -123,16 +114,9 @@ export default function App() {
           <Routes>
             {routes.map((route: RouteDefinition) =>
               route.enabled(routerConfig) ? (
-                <Route
-                  key={route.path}
-                  path={route.path}
-                  element={route.getElement(routerConfig)}
-                >
+                <Route key={route.path} path={route.path} element={route.getElement(routerConfig)}>
                   {route.nestedPaths.map((nestedPath) => (
-                    <Route
-                      path={nestedPath}
-                      key={`${route.path}/${nestedPath}`}
-                    />
+                    <Route path={nestedPath} key={`${route.path}/${nestedPath}`} />
                   ))}
                 </Route>
               ) : null
@@ -144,5 +128,5 @@ export default function App() {
         <PageTabs />
       </MobileBottomBar>
     </ErrorBoundary>
-  );
+  )
 }

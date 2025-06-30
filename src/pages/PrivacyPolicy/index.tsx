@@ -49,7 +49,7 @@ export default function PrivacyPolicy() {
 
 *Last Updated: December 2024*
 
-*This Privacy Policy explains how the DataDex Foundation, its subsidiary, collects, uses, and discloses information about you. This Privacy Policy applies when you use our website, DataDex Protocol user-interface or application and other online products (collectively, our “UI”), engage with us on social media, or otherwise interact with us.*
+*This Privacy Policy explains how the DataDex Foundation, its subsidiary, collects, uses, and discloses information about you. This Privacy Policy applies when you use our website, DataDex Protocol user-interface or application and other online products (collectively, our "UI"), engage with us on social media, or otherwise interact with us.*
 
 *We may change this Privacy Policy from time to time. If we make changes, we will notify you by revising the date at the top of this policy and, when material, we will provide you with additional notice by adding a statement to our website and consent as required under applicable law. Your continued use of this UI after we make changes is deemed to be acceptance of those changes when permissible. We encourage you to review this Privacy Policy regularly to stay informed about our information practices and the choices available to you.*
 
@@ -57,7 +57,7 @@ export default function PrivacyPolicy() {
 
 - DataDex does not typically request, collect or use personal information. With the exception of your wallet address, there is no reason for you to provide personal information when you use the UI.
 - DataDex does not and has not stored personal information from users of the UI. However, DataDex uses third party services including, without limitation, Cloudflare and Fathom Analytics who may collect and store certain user information only for use in the provision of their services.
-- DataDex does not set any cookies. However, it’s possible we may use third party service providers in the future that set cookies.
+- DataDex does not set any cookies. However, it's possible we may use third party service providers in the future that set cookies.
 
 ## **Collection of Information**
 
@@ -72,7 +72,7 @@ DataDex is not directed to children under the age of 16. If a parent or guardian
 When you access or use our UI, we may automatically collect certain information, including:
 
 - *Device and Usage Information:* We (and our service providers) collect information about how you access the UI, including data about the device and network you use, such as your hardware model, operating system version, mobile network, browser type, IP address and app version. We do not typically, but we may, also collect information about your activity on the UI, such as access times, pages viewed, links clicked, and the page you visited before navigating to the UI.
-- *Information Collected by Cookies and Similar Tracking Technologies:* We do not typically use tracking technologies, such as cookies and web beacons, to collect information about you. Cookies are small data files stored on your hard drive or in device memory that help us improve the UI and your experience, see which areas and features of the UI are popular, and count visits. Web beacons (also known as “pixel tags” or “clear GIFs”) are electronic images that we use on the UI to help deliver cookies, count visits, and understand usage and campaign effectiveness. For more information about cookies and how to disable them, see our [Cookies Policy](https://app.symm.fi/#/cookies-policy) and the Your Choices section below.
+- *Information Collected by Cookies and Similar Tracking Technologies:* We do not typically use tracking technologies, such as cookies and web beacons, to collect information about you. Cookies are small data files stored on your hard drive or in device memory that help us improve the UI and your experience, see which areas and features of the UI are popular, and count visits. Web beacons (also known as "pixel tags" or "clear GIFs") are electronic images that we use on the UI to help deliver cookies, count visits, and understand usage and campaign effectiveness. For more information about cookies and how to disable them, see our [Cookies Policy](https://app.symm.fi/#/cookies-policy) and the Your Choices section below.
 
 ### **Information We Collect from Other Sources**
 
@@ -109,7 +109,7 @@ We do not have access to or share personally identifiable information, other tha
 - We may share personal information if we believe that your actions are inconsistent with our user agreements or policies, if we believe that you have violated the law, or if we believe it is necessary to protect the rights, property, and safety of DataDex, the DataDex ecosystem, the public, or others.
 - We share personal information with our lawyers and other professional advisors where necessary to obtain advice or otherwise protect and manage our business interests.
 - We may share personal information in connection with, or during negotiations concerning, merger, sale of company assets, financing, bankruptcy, business closure, or acquisition of all or a portion of our assets. Additionally, as part of such an event, we may transfer or sell personal information to a third party. We will provide notice to you on our UI of any such sharing to a third party and any choices you may have regarding the sharing of your personal information.
-- Personal information may be shared between and among DataDex and our current and future parents, affiliates, and subsidiaries and other companies under common control and ownership (“corporate affiliates”). This information may be used to provide you with offers, services, or products that may be of interest to you and provide you with their products and services. Any such corporate affiliate may use your personal information only according to the terms of this Policy. If you are located in a jurisdiction where such sharing requires your permission, we will only share such information with your consent. If you decide you no longer wish to receive these promotional communications, please follow the instructions provided in Your Choices section below.
+- Personal information may be shared between and among DataDex and our current and future parents, affiliates, and subsidiaries and other companies under common control and ownership ("corporate affiliates"). This information may be used to provide you with offers, services, or products that may be of interest to you and provide you with their products and services. Any such corporate affiliate may use your personal information only according to the terms of this Policy. If you are located in a jurisdiction where such sharing requires your permission, we will only share such information with your consent. If you decide you no longer wish to receive these promotional communications, please follow the instructions provided in Your Choices section below.
 - We share personal information with your consent or at your direction.
 - We also share aggregated or de-identified information that cannot reasonably be used to identify you.
 
@@ -133,9 +133,9 @@ In the preceding 12 months, we or our vendors may have collected the following c
 With our compliance partner, TRM Labs, we only share wallet addresses used to connect a wallet to our UI (all other user information like IP addresses, device identifiers and location are not shared). The code for the UI is open source, and can be reviewed by anyone at any time. |
 | Internet or other electronic network activity information | We share with vendors: information regarding an interaction with an UI/website |
 
-DataDex does not “sell” personal information to advertise our products to you or otherwise.
+DataDex does not "sell" personal information to advertise our products to you or otherwise.
 
-Subject to certain limitations, you have the right to (1) request to know more about the categories and specific pieces of personal information we collect, use, and disclose, and sell, (2) request deletion of your personal information, (3) opt out of any “sales” of your personal information that may be occurring, and (4) not be discriminated against for exercising these rights. You may make these requests by emailing us at vanadatadex@gmail.com. If we receive your request from an authorized agent, we may ask for evidence that you have provided such agent with a power of attorney or that the agent otherwise has valid written authority to submit requests to exercise rights on your behalf. If you are an authorized agent seeking to make a request, please contact us.
+Subject to certain limitations, you have the right to (1) request to know more about the categories and specific pieces of personal information we collect, use, and disclose, and sell, (2) request deletion of your personal information, (3) opt out of any "sales" of your personal information that may be occurring, and (4) not be discriminated against for exercising these rights. You may make these requests by emailing us at vanadatadex@gmail.com. If we receive your request from an authorized agent, we may ask for evidence that you have provided such agent with a power of attorney or that the agent otherwise has valid written authority to submit requests to exercise rights on your behalf. If you are an authorized agent seeking to make a request, please contact us.
 
 ### **Shine the Light**
 
@@ -143,7 +143,7 @@ DataDex does not share such information with third parties for direct marketing 
 
 ### **Do Not Track Signals**
 
-Our Services do not respond to “Do Not Track” signals communicated by your browser. We do not knowingly retain or sell tracking information collected about your online activity. For more information about Do Not Track, please visit [www.allaboutdnt.com](https://allaboutdnt.com/).
+Our Services do not respond to "Do Not Track" signals communicated by your browser. We do not knowingly retain or sell tracking information collected about your online activity. For more information about Do Not Track, please visit [www.allaboutdnt.com](https://allaboutdnt.com/).
 
 ## **Additional Disclousures for Individuals in Europe**
 

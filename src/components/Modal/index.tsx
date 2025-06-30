@@ -11,7 +11,9 @@ export const MODAL_TRANSITION_DURATION = 200
 
 const AnimatedDialogOverlay = animated(DialogOverlay)
 
-const StyledDialogOverlay = styled(AnimatedDialogOverlay)<{ $scrollOverlay?: boolean }>`
+const StyledDialogOverlay = styled(AnimatedDialogOverlay)<{
+  $scrollOverlay?: boolean
+}>`
   &[data-reach-dialog-overlay] {
     z-index: ${Z_INDEX.modalBackdrop};
     background-color: transparent;
@@ -111,7 +113,10 @@ export default function Modal({
     leave: { opacity: 0 },
   })
 
-  const [{ y }, set] = useSpring(() => ({ y: 0, config: { mass: 1, tension: 210, friction: 20 } }))
+  const [{ y }, set] = useSpring(() => ({
+    y: 0,
+    config: { mass: 1, tension: 210, friction: 20 },
+  }))
   const bind = useGesture({
     onDrag: (state) => {
       set({
@@ -129,7 +134,9 @@ export default function Modal({
         ({ opacity }, item) =>
           item && (
             <StyledDialogOverlay
-              style={{ opacity: opacity.to({ range: [0.0, 1.0], output: [0, 1] }) }}
+              style={{
+                opacity: opacity.to({ range: [0.0, 1.0], output: [0, 1] }),
+              }}
               onDismiss={onDismiss}
               initialFocusRef={initialFocusRef}
               unstable_lockFocusAcrossFrames={false}
@@ -139,7 +146,9 @@ export default function Modal({
                 {...(isMobile
                   ? {
                       ...bind(),
-                      style: { transform: y.interpolate((y) => `translateY(${(y as number) > 0 ? y : 0}px)`) },
+                      style: {
+                        transform: y.interpolate((y) => `translateY(${(y as number) > 0 ? y : 0}px)`),
+                      },
                     }
                   : {})}
                 aria-label="dialog"

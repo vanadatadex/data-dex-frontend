@@ -43,7 +43,13 @@ export function useAddPopup(): (content: PopupContent, key?: string, removeAfter
 
   return useCallback(
     (content: PopupContent, key?: string, removeAfterMs?: number) => {
-      dispatch(addPopup({ content, key, removeAfterMs: removeAfterMs ?? DEFAULT_TXN_DISMISS_MS }))
+      dispatch(
+        addPopup({
+          content,
+          key,
+          removeAfterMs: removeAfterMs ?? DEFAULT_TXN_DISMISS_MS,
+        })
+      )
     },
     [dispatch]
   )

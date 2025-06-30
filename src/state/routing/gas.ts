@@ -41,5 +41,8 @@ export async function getApproveInfo(
     approveGasUseEstimate = APPROVE_FALLBACK_GAS_LIMIT
   }
 
-  return { needsApprove: true, approveGasEstimateUSD: approveGasUseEstimate * usdCostPerGas }
+  return {
+    needsApprove: true,
+    approveGasEstimateUSD: approveGasUseEstimate * usdCostPerGas,
+  }
 }

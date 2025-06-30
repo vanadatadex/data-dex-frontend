@@ -1,62 +1,62 @@
-import { ChainId } from "@vanadex/sdk-core";
-import ethereumLogoUrl from "assets/images/ethereum-logo.png";
-import vanaLogoUrl from "assets/images/vana.png";
-import ms from "ms";
-import { darkTheme } from "theme/colors";
+import { ChainId } from '@vanadex/sdk-core'
+import ethereumLogoUrl from 'assets/images/ethereum-logo.png'
+import vanaLogoUrl from 'assets/images/vana.png'
+import ms from 'ms'
+import { darkTheme } from 'theme/colors'
 
-import { SupportedL1ChainId, SupportedL2ChainId } from "./chains";
-import { VANA_MOKSHA_LIST } from "./lists";
+import { SupportedL1ChainId, SupportedL2ChainId } from './chains'
+import { VANA_MOKSHA_LIST } from './lists'
 
-export const AVERAGE_L1_BLOCK_TIME = ms(`12s`);
+export const AVERAGE_L1_BLOCK_TIME = ms(`12s`)
 
 export enum NetworkType {
   L1,
   L2,
 }
 interface BaseChainInfo {
-  readonly networkType: NetworkType;
-  readonly blockWaitMsBeforeWarning?: number;
-  readonly docs: string;
-  readonly bridge?: string;
-  readonly explorer: string;
-  readonly infoLink: string;
-  readonly logoUrl: string;
-  readonly circleLogoUrl?: string;
-  readonly squareLogoUrl?: string;
-  readonly label: string;
-  readonly helpCenterUrl?: string;
+  readonly networkType: NetworkType
+  readonly blockWaitMsBeforeWarning?: number
+  readonly docs: string
+  readonly bridge?: string
+  readonly explorer: string
+  readonly infoLink: string
+  readonly logoUrl: string
+  readonly circleLogoUrl?: string
+  readonly squareLogoUrl?: string
+  readonly label: string
+  readonly helpCenterUrl?: string
   readonly nativeCurrency: {
-    name: string; // e.g. 'Goerli ETH',
-    symbol: string; // e.g. 'gorETH',
-    decimals: number; // e.g. 18,
-  };
-  readonly color?: string;
-  readonly backgroundColor?: string;
+    name: string // e.g. 'Goerli ETH',
+    symbol: string // e.g. 'gorETH',
+    decimals: number // e.g. 18,
+  }
+  readonly color?: string
+  readonly backgroundColor?: string
 }
 
 interface L1ChainInfo extends BaseChainInfo {
-  readonly networkType: NetworkType.L1;
-  readonly defaultListUrl?: string;
+  readonly networkType: NetworkType.L1
+  readonly defaultListUrl?: string
 }
 
 export interface L2ChainInfo extends BaseChainInfo {
-  readonly networkType: NetworkType.L2;
-  readonly bridge: string;
-  readonly statusPage?: string;
-  readonly defaultListUrl: string;
+  readonly networkType: NetworkType.L2
+  readonly bridge: string
+  readonly statusPage?: string
+  readonly defaultListUrl: string
 }
 
-type ChainInfoMap = { readonly [chainId: number]: L1ChainInfo | L2ChainInfo };
+type ChainInfoMap = { readonly [chainId: number]: L1ChainInfo | L2ChainInfo }
 
 const CHAIN_INFO: ChainInfoMap = {
   [ChainId.MAINNET]: {
     networkType: NetworkType.L1,
-    docs: "https://docs.uniswap.org/",
-    explorer: "https://etherscan.io/",
-    infoLink: "https://info.uniswap.org/#/",
-    label: "Ethereum",
+    docs: 'https://docs.uniswap.org/',
+    explorer: 'https://etherscan.io/',
+    infoLink: 'https://info.uniswap.org/#/',
+    label: 'Ethereum',
     logoUrl: ethereumLogoUrl,
-    nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
+    nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
     color: darkTheme.chain_1,
   },
   // [ChainId.GOERLI]: {
@@ -246,43 +246,38 @@ const CHAIN_INFO: ChainInfoMap = {
   [ChainId.VANA]: {
     networkType: NetworkType.L1,
     blockWaitMsBeforeWarning: ms(`10m`),
-    bridge: "https://stargate.finance/bridge?srcChain=vana",
+    bridge: 'https://stargate.finance/bridge?srcChain=vana',
     defaultListUrl: VANA_MOKSHA_LIST,
-    docs: "https://docs.datadex.com/",
-    explorer: "https://islander.vanascan.io/",
-    infoLink: "https://info.datadex.com/",
-    label: "Vana",
+    docs: 'https://docs.datadex.com/',
+    explorer: 'https://islander.vanascan.io/',
+    infoLink: 'https://info.datadex.com/',
+    label: 'Vana',
     logoUrl: vanaLogoUrl,
     circleLogoUrl: vanaLogoUrl,
-    nativeCurrency: { name: "Vana", symbol: "VANA", decimals: 18 },
+    nativeCurrency: { name: 'Vana', symbol: 'VANA', decimals: 18 },
     color: darkTheme.chain_5,
   },
   [ChainId.VANA_MOKSHA]: {
     networkType: NetworkType.L1,
     blockWaitMsBeforeWarning: ms(`10m`),
     defaultListUrl: VANA_MOKSHA_LIST,
-    docs: "https://docs.uniswap.org/",
-    explorer: "https://moksha.vanascan.io/",
-    infoLink: "https://info.uniswap.org/#/",
-    label: "Vana Moksha",
+    docs: 'https://docs.uniswap.org/',
+    explorer: 'https://moksha.vanascan.io/',
+    infoLink: 'https://info.uniswap.org/#/',
+    label: 'Vana Moksha',
     logoUrl: vanaLogoUrl,
     circleLogoUrl: vanaLogoUrl,
-    nativeCurrency: { name: "Vana", symbol: "VANA", decimals: 18 },
+    nativeCurrency: { name: 'Vana', symbol: 'VANA', decimals: 18 },
     color: darkTheme.chain_5,
   },
-} as const;
+} as const
 
-export function getChainInfo(chainId: SupportedL1ChainId): L1ChainInfo;
-export function getChainInfo(chainId: SupportedL2ChainId): L2ChainInfo;
-export function getChainInfo(chainId: ChainId): L1ChainInfo | L2ChainInfo;
+export function getChainInfo(chainId: SupportedL1ChainId): L1ChainInfo
+export function getChainInfo(chainId: SupportedL2ChainId): L2ChainInfo
+export function getChainInfo(chainId: ChainId): L1ChainInfo | L2ChainInfo
 export function getChainInfo(
-  chainId:
-    | ChainId
-    | SupportedL1ChainId
-    | SupportedL2ChainId
-    | number
-    | undefined
-): L1ChainInfo | L2ChainInfo | undefined;
+  chainId: ChainId | SupportedL1ChainId | SupportedL2ChainId | number | undefined
+): L1ChainInfo | L2ChainInfo | undefined
 
 /**
  * Overloaded method for returning ChainInfo given a chainID
@@ -294,12 +289,12 @@ export function getChainInfo(
  */
 export function getChainInfo(chainId: any): any {
   if (chainId) {
-    return CHAIN_INFO[chainId] ?? undefined;
+    return CHAIN_INFO[chainId] ?? undefined
   }
-  return undefined;
+  return undefined
 }
 
-const MAINNET_INFO = CHAIN_INFO[ChainId.VANA];
+const MAINNET_INFO = CHAIN_INFO[ChainId.VANA]
 export function getChainInfoOrDefault(chainId: number | undefined) {
-  return getChainInfo(chainId) ?? MAINNET_INFO;
+  return getChainInfo(chainId) ?? MAINNET_INFO
 }
