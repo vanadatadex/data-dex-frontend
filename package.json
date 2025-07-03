@@ -287,7 +287,7 @@
   },
   "engines": {
     "npm": "please-use-yarn",
-    "node": "18.x",
+    "node": "18.20.6",
     "yarn": ">=1.22"
   },
   "homepage": "./",
@@ -303,6 +303,9 @@
     "@vanadex/smart-order-router/@uniswap/v3-sdk": "3.11.0",
     "@uniswap/router-sdk": "1.5.0",
     "@types/react": "18.3.23",
-    "@types/react-dom": "18.0.6"
+    "@types/react-dom": "18.0.6",
+    "@lingui/core": "4.3.0",
+    "@lingui/macro": "4.3.0",
+    "@lingui/react": "4.3.0"
   }
 }
