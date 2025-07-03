@@ -7228,12 +7228,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.0.0, @types/react-dom@npm:^18.0.6":
-  version: 18.3.7
-  resolution: "@types/react-dom@npm:18.3.7"
-  peerDependencies:
-    "@types/react": ^18.0.0
-  checksum: c8b63ec944d2a68992b4dba474003fe55ee1d949c4b9c8fe97eecb2290de23f76acfb670b2f7ceb46a5fc8e46808d1745369b03edda48a7a0cf730eff4c5d315
+"@types/react-dom@npm:18.0.6":
+  version: 18.0.6
+  resolution: "@types/react-dom@npm:18.0.6"
+  dependencies:
+    "@types/react": "*"
+  checksum: db571047af1a567631758700b9f7d143e566df939cfe5fbf7535347cc0c726a1cdbb5e3f8566d076e54cf708b6c1166689de194a9ba09ee35efc9e1d45911685
   languageName: node
   linkType: hard
 
@@ -7286,16 +7286,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*":
-  version: 19.1.8
-  resolution: "@types/react@npm:19.1.8"
-  dependencies:
-    csstype: ^3.0.2
-  checksum: 17e0c74d9c01214938fa805aaa8b97925bf3c5514e88fdf94bec42c0a6d4abbc63d4e30255db176f46fd7f0aa89f8085b9b2b2fa5abaffbbf7e5009386ada892
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:^18.3.12":
+"@types/react@npm:18.3.23":
   version: 18.3.23
   resolution: "@types/react@npm:18.3.23"
   dependencies:
