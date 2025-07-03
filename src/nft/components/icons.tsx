@@ -9,7 +9,7 @@ type SVGProps = React.SVGProps<SVGSVGElement> & {
   width?: string | number
   gradientId?: string
 }
-
+// eslint-disable-next-line
 export const VanaIcon = (props: SVGProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +82,7 @@ export const VanaIcon = (props: SVGProps) => (
     </g>
   </svg>
 )
-
+// eslint-disable-next-line
 export const VanaDarkIcon = (props: SVGProps) => (
   <svg width="50" height="50" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M0 0H500V500H0V0Z" fill="url(#pattern0_419_43)" />
